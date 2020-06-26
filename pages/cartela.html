@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARTELA | bingo online</title>
+    <script>
+        function gerarNumeroAleatorio(range){
+            return Math.floor(range*Math.random());
+        }
+        
+        function gerarCartela(){
+            var cartela;
+            var tableSpace = document.getElementById("div-cartela");
+            tableSpace.innerHTML = "";
+            var table = document.createElement('table');
+            var tr;
+            var td;
+            var num; 
+            var numArr = [];
+            tr = document.createElement('tr');
+            tr.innerHTML= '<th> B </th><th> I </th><th> N </th><th> G </th><th> O </th>';
+            table.appendChild(tr);
+            for ( let i = 0; i < 5; i++){
+                tr = document.createElement('tr');
+                for ( let j = 0; j < 5; j++){
+                    num = gerarNumeroAleatorio(75);
+                    if(numArr.indexOf(num) > -1){
+                        j--
+                    }
+                    else{
+                        numArr.push(num);
+                        td = document.createElement('td');
+                        td.addEventListener("click",function(){
+                            this.style = "background-color: lime"
+                        });
+                        td.innerHTML += "<h1> "+ num + "</h1>";
+                        tr.appendChild(td);
+                    }
+
+                }
+                table.appendChild(tr);
+            }  
+            tableSpace.appendChild(table);
+        }
+    </script>
+    <style>
+        *{
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+        }
+        table{
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid red;
+        }
+        th{
+            font-size: 60px;
+        }
+        td {
+            border: 5px solid red;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+        }
+        #div-cartela table{
+            margin: auto;
+        }
+        body{
+            background-image: url("https://www.topimagens.com.br/img/imagens55/feliz-sao-joao-134592gASneKQtZ.jpg");
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="div-cartela"></div>
+    <span style="color: white; font-size: 60px; font-family: Arial, Helvetica, sans-serif;"> CLICK NO BOTÃO ABAIXO PARA GERAR UMA CARTELA</span>
+    <form action="">
+        <input type="button" onclick="gerarCartela()" value="gerar cartela">
+    </form>
+</body>
+</html>
