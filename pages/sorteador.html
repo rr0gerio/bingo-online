@@ -10,36 +10,43 @@
             return Math.floor(range*Math.random());
         }
         
+        var numArr = [];
+        var table = document.createElement('table');
+        var tr = document.createElement('tr');
         function gerarCartela(){
+            if(numArr.length == 0 || numArr.length%5 == 0){
+                tr = document.createElement('tr');
+            }
+            if(numArr.length == 75 ){
+                document.getElementById("sortear").setAttribute("disable","disable");
+                return;
+            }
             var cartela;
             var tableSpace = document.getElementById("div-cartela");
             tableSpace.innerHTML = "";
-            var table = document.createElement('table');
-            var tr;
             var td;
             var num; 
-            var numArr = [];
-            for ( let i = 0; i < 15; i++){
-                tr = document.createElement('tr');
-                for ( let j = 0; j < 5; j++){
-                    num = gerarNumeroAleatorio(75);
-                    if(numArr.indexOf(num) > -1){
-                        j--
-                    }
-                    else{
-                        numArr.push(num);
-                        td = document.createElement('td');
-                        td.addEventListener("click",function(){
-                            this.style = "background-color: lime"
-                        });
-                        td.innerHTML += "<h1> "+ num + "</h1>";
-                        tr.appendChild(td);
-                    }
-                    
-                }
-                table.appendChild(tr);
-            }  
+            
+            
+            num = gerarNumeroAleatorio(75);
+            if(numArr.indexOf(num) > -1){
+                gerarCartela();
+            }
+            else{
+                numArr.push(num);
+                td = document.createElement('td');
+                td.addEventListener("click",function(){
+                    this.style = "background-color: lime"
+                });
+                td.innerHTML += "<h1> "+ num + "</h1>";
+                tr.appendChild(td);
+            }
+            
+            
+            table.appendChild(tr);
+            
             tableSpace.appendChild(table);
+            
         }
     </script>
     
@@ -71,10 +78,10 @@
 </head>
 <body>
     <div id="div-cartela"></div>
-    <span style="color: white; font-size: 60px; font-family: Arial, Helvetica, sans-serif;"> CLICK NO BOTÃO ABAIXO PARA GERAR UMA TABELA</span>
+    <span style="color: red; font-size: 40px; font-family: Arial, Helvetica, sans-serif; background-color: white;"> CLICK NO BOTÃO ABAIXO PARA GERAR UMA TABELA</span>
     
     <form action="">
-        <input type="button" value="sortear numero" onclick="gerarCartela()">
+        <input type="button" id="sortear" value="sortear numero" onclick="gerarCartela()">
     </form>
 </body>
 </html>
