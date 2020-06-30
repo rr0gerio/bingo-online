@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="."/>
+	<meta charset="UTF-8">	
+	<meta property="og:locale" content="pt_BR" />
+	<meta property="og:url" content="https://r0ger-io.github.io/bingo-online" /><!-- bota o site aqui -->
+	<meta property="og:title" content="Bingo do Roger" />
+	<meta property="og:site_name" content="Bingo do Roger" />
+	<meta property="og:description" content="O portal Bingo Online é um projeto livre para entreterimento entre amigos." />
+	<meta property="og:image" content="../src/images/image.jpg" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image:width" content="800" /> 
+	<meta property="og:image:height" content="600" />
+	<meta property="og:type" content="website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../css/master.css">
+    <link rel="icon" href="../images/favico.jpg" sizes="16x16" />
+
+    <script src="../js/main.js"></script>
+    <script src="../js/sorteador.js"></script>
+
+    <title>SORTEADOR | BINGO DO ROGER</title>
+</head>
+<body>
+    <div class="header sorteador">
+        <span style="color: red; font-size: 40px; font-family: Arial, Helvetica, sans-serif; background-color: white;"> 
+            Pressione o botão para sortear um número.
+        </span>
+        <form action="">
+            <input type="button" id="sortear" value="sortear numero" onclick="gerarTabelaSorteio()">
+        </form>
+    </div>
+    <div id="div-cartela"></div>
+</body>
+</html>

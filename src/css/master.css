@@ -1,0 +1,38 @@
+.menu{
+    background-color: white;
+    border: 1px solid red;
+    font-size: 28px;
+    color: red;
+    width: fit-content;
+}
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+table{
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid red;
+}
+th{
+    font-size: 60px;
+}
+td {
+    border: 5px solid red;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+#div-cartela table{
+    margin: auto;
+}
+body{
+    background-image: url("https://www.topimagens.com.br/img/imagens55/feliz-sao-joao-134592gASneKQtZ.jpg");
+}
+#gerar{
+    height: 75px;
+    width: 100px;
+    font-size: 16px;
+}
+.sorteador{
+    position: fixed;
+}
