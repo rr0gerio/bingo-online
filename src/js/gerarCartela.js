@@ -7,15 +7,18 @@ function gerarCartela(){
     var num; 
     var numArr = [];
     tr = document.createElement('tr');
-    tr.innerHTML= '<th> R </th><th> O </th><th> G </th><th> E </th><th> R </th>';
+    tr.innerHTML= '<th> B </th><th> I </th><th> N </th><th> G </th><th> O</th>';
     table.appendChild(tr);
     for ( let i = 0; i < 5; i++){
         tr = document.createElement('tr');
         for ( let j = 0; j < 5; j++){
             num = gerarNumeroAleatorio(75);
-            if(numArr.indexOf(num) > -1 || num == 0){
+            posicao = verificaPosicao(numArr.length)
+            min = posicao == 1 ? 1 : ((posicao-1)*15)+1;
+            max = posicao == 1 ? 15: posicao*15;
+            if(numArr.indexOf(num) > -1 || num == 0 || num < min || num > max ){
                 j--;
-            }
+            }      
             else{
                 numArr.push(num);
                 td = document.createElement('td');
@@ -23,7 +26,7 @@ function gerarCartela(){
                     this.style = "background-color: lime"
                 });
                 if(numArr.length == 13){
-                    td.innerHTML += "<h1> ROGER </h1>";
+                    td.innerHTML += "<h1> FREE </h1>";
                 }
                 else{
                     

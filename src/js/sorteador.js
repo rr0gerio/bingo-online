@@ -1,7 +1,8 @@
 var numArr = [];
 var table = document.createElement('table');
 var tr = document.createElement('tr');
-
+tr.innerHTML= '<th> B </th><th> I </th><th> N </th><th> G </th><th> O</th>';
+table.appendChild(tr);
 function gerarTabelaSorteio(){
     if(numArr.length == 0 || numArr.length%5 == 0){
         tr = document.createElement('tr');
@@ -17,7 +18,10 @@ function gerarTabelaSorteio(){
     
     
     num = gerarNumeroAleatorio(76);
-    if(numArr.length != 75 && numArr.indexOf(num) > -1 || num == 0){
+    posicao = verificaPosicao(numArr.length)
+    min = posicao == 1 ? 1 : ((posicao-1)*15)+1;
+    max = posicao == 1 ? 15: posicao*15;
+    if(numArr.length != 75 && numArr.indexOf(num) > -1 || num == 0 || num < min || num > max ){
         gerarTabelaSorteio();
     }
     else{
