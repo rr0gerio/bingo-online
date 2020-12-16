@@ -11,8 +11,7 @@ function gerarTabelaSorteio(){
         document.getElementById("sortear").setAttribute("disable","disable");
         return;
     }
-    var tableSpace = document.getElementById("div-cartela");
-    //tableSpace.innerHTML = "";
+    var tableSpace = document.getElementById("cartela");
     var td;
     var num; 
     
@@ -28,6 +27,7 @@ function gerarTabelaSorteio(){
         numArr.push(num);
         td = document.createElement('td');
         td.innerHTML += "<h1> "+ num + "</h1>";
+        td.classList.add("sorteado");
         tr.appendChild(td);
     }
     

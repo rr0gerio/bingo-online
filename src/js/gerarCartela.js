@@ -1,5 +1,7 @@
 function gerarCartela(){
-    var tableSpace = document.getElementById("div-cartela");
+    document.getElementById("menu-cartela").style = "display:none";
+    document.getElementById("instrucoes").style = "display:block";
+    var tableSpace = document.getElementById("cartela");
     tableSpace.innerHTML = "";
     var table = document.createElement('table');
     var tr;
@@ -14,18 +16,21 @@ function gerarCartela(){
         for ( let j = 0; j < 5; j++){
             num = gerarNumeroAleatorio(75);
             posicao = verificaPosicao(numArr.length)
-            min = posicao == 1 ? 1 : ((posicao-1)*15)+1;
-            max = posicao == 1 ? 15: posicao*15;
+            min = ((posicao-1)*15)+1;
+            max = posicao*15;
             if(numArr.indexOf(num) > -1 || num == 0 || num < min || num > max ){
                 j--;
             }      
             else{
                 numArr.push(num);
                 td = document.createElement('td');
-                td.addEventListener("click",function(){
-                    this.style = "background-color: lime"
-                });
+                if(numArr.length != 13){
+                    td.addEventListener("click",function(){
+                        this.classList.add("marked");
+                    });
+                }
                 if(numArr.length == 13){
+                    td.classList.add("central")
                     td.innerHTML += "<h1> FREE </h1>";
                 }
                 else{

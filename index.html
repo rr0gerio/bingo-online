@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<base href="."/>
-	<meta charset="UTF-8">	
-	<meta property="og:locale" content="pt_BR" />
-	<meta property="og:url" content="https://r0ger-io.github.io/bingo-online" /><!-- bota o site aqui -->
-	<meta property="og:title" content="Bingo do Roger" />
-	<meta property="og:site_name" content="Bingo do Roger" />
-	<meta property="og:description" content="O portal Bingo Online é um projeto livre para entreterimento entre amigos." />
-	<meta property="og:image" content="./src/images/image.jpg" />
-	<meta property="og:image:type" content="image/jpeg" />
-	<meta property="og:image:width" content="800" /> 
-	<meta property="og:image:height" content="600" />
-	<meta property="og:type" content="website" />
-	<link rel="icon" href="./src/images/favico.jpg" sizes="16x16" />
+    <base href="."/>
+    <meta charset="UTF-8">	
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:url" content="https://r0ger-io.github.io/bingo-online" /><!-- bota o site aqui -->
+    <meta property="og:title" content="Bingo do Roger" />
+    <meta property="og:site_name" content="Bingo do Roger" />
+    <meta property="og:description" content="O portal Bingo Online é um projeto livre para entreterimento entre amigos." />
+    <meta property="og:image" content="./src/images/image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="800" /> 
+    <meta property="og:image:height" content="600" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="./src/images/favico.jpg" sizes="16x16" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="./src/css/master.css">
-
+    
     <title>BINGO DO ROGER | INICIO</title>
 </head>
-<style>
-  
-    body{
-            background-image: url("https://www.topimagens.com.br/img/imagens55/feliz-sao-joao-134592gASneKQtZ.jpg");
-        }
-</style>
-<body>
-    <div class="menu">
-        <P>SEJA BEM VINDO AO BINGO DO ROGER</P>
-        <P>ESCOLHA SUA POSIÇÃO NO MENU ABAIXO</P>
-        <br><br>
-        <NAV>
-            <UL>
-                <LI><A href="./src/pages/cartela.html">Participante</A></LI>
-                <LI><A href="./src/pages/sorteador.html">Sorteador</A></LI>
-            </UL>
-        </NAV>
+<body class="home">
+    <div class="container">
+        <div class="main-card">
+            <div class="division card-left">   
+                <div class="menu">
+                    <h1>Seja bem vindo ao bingo do Roger 2.0!</h1>
+                    <h3>Escolha sua posição no menu abaixo</h3>
+                    <nav>
+                        <ul class="jogador-posit-menu">
+                            <li><a href="./src/pages/cartela.html" class="menu-button">Participante</a></li>
+                            <li><a href="./src/pages/sorteador.html" class="menu-button">Sorteador</a></li>
+                            <li><a href="https://www.policiacivil.sp.gov.br/portal/faces/pages_home/institucional/departamentosOrgaos/departamentosOrgaosDetalhes?titulo=DEIC&_afrLoop=964980536613394&_afrWindowMode=0&_afrWindowId=null" class="menu-button">Agiota</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="division card-right">   
+                <img src="https://www.gifmania.us/Animated-Gifs-Objects/Free-Animations-Toys/Images-Casino/Bingo/Playing-Bingo-89297.gif" alt="" srcset="" class="home-gif">
+            </div>
+        </div>
     </div>
 </body>
 </html>
