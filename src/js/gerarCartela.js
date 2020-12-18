@@ -1,6 +1,6 @@
 function gerarCartela(){
-    document.getElementById("menu-cartela").style = "display:none";
-    document.getElementById("instrucoes").style = "display:block";
+    // document.getElementById("menu-cartela").style = "display:none";
+    // document.getElementById("instrucoes").style = "display:block";
     var tableSpace = document.getElementById("cartela");
     tableSpace.innerHTML = "";
     var table = document.createElement('table');
