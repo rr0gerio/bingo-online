@@ -31,7 +31,7 @@ function gerarCartela(){
                 }
                 if(numArr.length == 13){
                     td.classList.add("central")
-                    td.innerHTML += "<h1> FREE </h1>";
+                    td.innerHTML += "<h1> SEC </h1>";
                 }
                 else{
                     
