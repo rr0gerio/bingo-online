@@ -30,8 +30,9 @@ function gerarCartela(){
                     });
                 }
                 if(numArr.length == 13){
-                    td.classList.add("central")
-                    td.innerHTML += "<h1> SEC </h1>";
+                    td.classList.add("central");
+                    td.classList.add("pablo");
+                    // td.innerHTML ;
                 }
                 else{
                     

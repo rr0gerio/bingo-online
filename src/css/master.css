@@ -148,3 +148,8 @@ td.marked, td.sorteado{
 td.sorteado{
     overflow-anchor: auto;
 }
+
+.pablo{
+    background-image: url("https://media.discordapp.net/attachments/699997619459588148/789622158660730910/pp.png?width=635&height=635");
+    background-size: cover;
+}
