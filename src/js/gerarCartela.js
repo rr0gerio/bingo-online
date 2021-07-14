@@ -31,11 +31,8 @@ function gerarCartela(){
                 }
                 if(numArr.length == 13){
                     td.classList.add("central");
-                    td.classList.add("pablo");
-                    // td.innerHTML ;
                 }
-                else{
-                    
+                else{                
                     td.innerHTML += "<h1> "+ num + "</h1>";
                 }
                 tr.appendChild(td);
@@ -47,4 +44,8 @@ function gerarCartela(){
     tableSpace.appendChild(table);
     
     document.getElementById("gerar").setAttribute("disabled","disabled");
+    console.log(numArr);
+}
+function verificaVencedor(){
+
 }
