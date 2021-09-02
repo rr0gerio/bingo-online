@@ -1,7 +1,7 @@
 var numArr = [];
 var table = document.createElement('table');
 var tr = document.createElement('tr');
-tr.innerHTML= '<th> B </th><th> I </th><th> N </th><th> G </th><th> O</th>';
+tr.innerHTML= '<th> P </th><th> O </th><th> I </th><th> N </th><th> T </th>';
 table.appendChild(tr);
 function gerarTabelaSorteio(){
     if(numArr.length == 0 || numArr.length%5 == 0){
