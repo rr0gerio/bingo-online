@@ -9,7 +9,7 @@ function gerarCartela(){
     var num; 
     var numArr = [];
     tr = document.createElement('tr');
-    tr.innerHTML= '<th> P </th><th> O </th><th> I </th><th> N </th><th> T </th>';
+    tr.innerHTML= '<th> S </th><th> E </th><th> C </th><th> 4 </th><th> U </th>';
     table.appendChild(tr);
     for ( let i = 0; i < 5; i++){
         tr = document.createElement('tr');
