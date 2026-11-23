@@ -19,8 +19,6 @@
     <link rel="icon" href="../images/favico.jpg" sizes="16x16" />
     
     <title>CARTELA | bingo online</title>
-    <script src="../js/main.js"></script>
-    <script src="../js/gerarCartela.js"></script>
 </head>
 <body>
     <div class="container">
@@ -34,10 +32,10 @@
                         <ul class="jogador-posit-menu">
                             <li>
 
-                                <input type="button" id="gerar" onclick="gerarCartela()" value="Jogar!" class="menu-button">
+                                <input type="button" id="gerar" value="Jogar!" class="menu-button">
                             </li>
                         <li>
-                            <a href="https://rr0gerio.github.io/bingo-online" class="menu-button">Voltar ao inicio</a>
+                            <a href="../../index.html" class="menu-button">Voltar ao inicio</a>
                         </li>
                         </ul>
                     </form>
@@ -66,11 +64,14 @@
                     </section>
                 </div>
             </div>
-            <div class="division card-right">   
+            <div class="division card-right card-right-sorteador">   
                 <div id="cartela"></div>
             </div>
             
         </div>
     </div>
+    <script src="../js/main.js"></script>
+    <script src="../js/logica.js"></script>
+    <script src="../js/gerarCartela.js"></script>
 </body>
 </html>

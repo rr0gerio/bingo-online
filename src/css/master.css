@@ -30,28 +30,34 @@ body.home{
 }
 .container{ 
     margin: auto;
-    position: relative;
     min-height:100vh;
     width: 90%;
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #cartela{
-    width: fit-content;
+    width: 100%;
+    max-width: 540px;
     margin: auto;
 }
 table{
+    width: 100%;
+    table-layout: fixed;
     border-collapse: separate;
-    border-spacing: 12px 8px;
+    border-spacing: 8px;
+}
+#cartela table + table{
+    margin-top: 24px;
 }
 th{
-    font-size: 60px;
-    width: 100px;
-    height: 100px;
+    font-size: clamp(1.75rem, 6vw, 3rem);
 }
 td {
     border: 1px solid rgba(0, 0, 0, 0.05);
-    width: 100px;
-    height: 100px;
+    height: clamp(52px, 12vw, 84px);
     text-align: center;
     border-radius: 5px;
     margin:30px;
@@ -83,22 +89,19 @@ td.marked, td.sorteado{
 
 
 .main-card{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: fit-content;
-    max-width: 1500px;
+    width: 100%;
+    max-width: 1200px;
     border-radius: 10px;    
-    padding: 70px 80px;
+    padding: clamp(24px, 5vw, 64px);
     box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25);
     background-color: rgba(255, 255, 255);
     display: grid;
-    grid-template-columns: 48% 52%;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px;
 }
 .card-right{
     border-left: 1px solid rgba(0, 0, 0, 0.15);
-
+    padding-left: 32px;
 }
 .card-left{
     /* border-right: 1px solid rgba(0, 0, 0, 0.15); */
@@ -126,10 +129,9 @@ td.marked, td.sorteado{
 }
 .jogador-posit-menu{
     display: flex;
-    justify-content: space-around;
-}
-.jogador-posit-menu > li{
-    margin: 1em;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
 }
 .jogador-posit-menu > li > a{
     display: table-cell;
@@ -145,7 +147,7 @@ td.marked, td.sorteado{
 }
 .card-right-sorteador{
     max-height: 620px;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-anchor: none;
 }
 td.sorteado{
@@ -157,4 +159,37 @@ td.sorteado{
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+td button{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background: none;
+    color: inherit;
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+.menu-button:disabled{
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+@media (max-width: 800px){
+    .main-card{
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .card-left{
+        padding-right: 0;
+    }
+    .card-right{
+        border-left: none;
+        padding-left: 0;
+    }
+    .card-right-sorteador{
+        max-height: none;
+        overflow-y: visible;
+    }
 }

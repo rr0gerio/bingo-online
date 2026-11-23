@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:title" content="Bingo do Roger - Partida">
+    <meta property="og:site_name" content="Bingo do Roger">
+    <meta property="og:description" content="Partida de bingo entre amigos">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="../images/favico.jpg" sizes="16x16">
+    <link rel="stylesheet" href="../css/master.css">
+    <title>BINGO DO ROGER | PARTIDA</title>
+    <style>
+        .jogo { max-width: 1200px; margin: 24px auto; padding: 24px; border-radius: 10px; background: #fff; box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25); }
+        .jogo h3 { color: #666; }
+        .jogo .menu-button { height: auto; min-height: 48px; padding: 8px 20px; }
+        .jogo .menu-button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
+        .jogo :focus-visible { outline: 3px solid #333; outline-offset: 2px; }
+        .controles { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 16px 0; }
+        .controles fieldset { display: flex; flex-wrap: wrap; gap: 16px; }
+        .controles legend { font-weight: 700; }
+        #mensagem { min-height: 3em; padding: 12px; border-radius: 5px; background: #eef0ff; }
+        #mensagem.vitoria { background: #d9f5df; font-weight: 700; }
+        #mensagem.erro { background: #ffe3e0; }
+        .sorteio { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 16px 0; }
+        #ultimo { min-width: 2em; font-size: 3rem; font-weight: 700; text-align: center; }
+        #chamados { display: flex; flex-wrap: wrap; gap: 6px; flex: 1 1 260px; }
+        #chamados li { min-width: 2.4em; padding: 2px 6px; border-radius: 5px; background: #eee; text-align: center; }
+        #cartelas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; }
+        .jogo table { width: 100%; max-width: 420px; border-spacing: 4px; table-layout: fixed; }
+        .jogo th { width: auto; height: auto; font-size: 1.5rem; }
+        .jogo td { width: auto; height: 56px; }
+        .jogo td button { width: 100%; height: 100%; border-radius: 5px; background: none; color: inherit; font-size: 1.25rem; font-weight: 700; cursor: pointer; }
+        .jogo td button:disabled { cursor: default; }
+        .jogo td.padrao { background-image: none; background-color: #17803a; }
+        .jogo td.padrao.central { background-color: #bfe8ca; background-image: url("../images/LogoSec4U.png"); }
+    </style>
+</head>
+<body>
+    <main class="jogo">
+        <h1>Bingo da Sec</h1>
+        <h3>Complete uma linha, coluna, diagonal ou os quatro cantos. O centro é livre.</h3>
+
+        <div class="controles">
+            <fieldset>
+                <legend>Cartelas</legend>
+                <label><input type="radio" name="quantidade" value="1" checked> 1</label>
+                <label><input type="radio" name="quantidade" value="2"> 2</label>
+                <label><input type="radio" name="quantidade" value="3"> 3</label>
+                <label><input type="radio" name="quantidade" value="4"> 4</label>
+            </fieldset>
+            <button type="button" id="nova-partida" class="menu-button">Nova partida</button>
+            <button type="button" id="sortear" class="menu-button" disabled>Sortear</button>
+            <a href="../../index.html">Voltar ao início</a>
+        </div>
+
+        <p id="mensagem" role="status">Escolha quantas cartelas quer usar e clique em "Nova partida".</p>
+
+        <section class="sorteio" aria-label="Números sorteados">
+            <div id="ultimo" aria-hidden="true">–</div>
+            <ol id="chamados"></ol>
+        </section>
+
+        <section id="cartelas" aria-label="Minhas cartelas"></section>
+    </main>
+
+    <script src="../js/logica.js"></script>
+    <script src="../js/jogo.js"></script>
+</body>
+</html>

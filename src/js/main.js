@@ -21,12 +21,3 @@ document.onkeydown = function(e) {
         return false;
     }
 }
-function verificaPosicao(arrayPosition){
-    //trata a posicao
-    arrayPosition = (arrayPosition + 1);
-    //retorna posicao em funcao do resto
-    return ((arrayPosition * 8) % 10)/-2 + 5;
-}
-function gerarNumeroAleatorio(range){
-    return Math.floor(range*Math.random());
-}

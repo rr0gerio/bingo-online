@@ -18,9 +18,6 @@
     <link rel="stylesheet" href="../css/master.css">
     <link rel="icon" href="../images/favico.jpg" sizes="16x16" />
     
-    <script src="../js/main.js"></script>
-    <script src="../js/sorteador.js"></script>
-    
     <title>SORTEADOR | BINGO DO ROGER</title>
 </head>
 <body>
@@ -31,7 +28,14 @@
                     <h1>Pressione o botão para sortear um número.</h1>
                     <h3>Não vale roubar, hein!?</h3>
                     <form action="">
-                        <input type="button" id="sortear" value="Sortear número" onclick="gerarTabelaSorteio()" class="menu-button">
+                        <ul class="jogador-posit-menu">
+                            <li>
+                                <input type="button" id="sortear" value="Sortear número" class="menu-button">
+                            </li>
+                            <li>
+                                <a href="../../index.html" class="menu-button">Voltar ao inicio</a>
+                            </li>
+                        </ul>
                     </form>
                 </div>
             </div>
@@ -40,5 +44,8 @@
             </div>
         </div>
     </div>
+    <script src="../js/main.js"></script>
+    <script src="../js/logica.js"></script>
+    <script src="../js/sorteador.js"></script>
 </body>
 </html>
