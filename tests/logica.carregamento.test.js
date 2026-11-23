@@ -17,9 +17,13 @@ const FUNCOES = [
   'cantarBingo',
   'criarCartela',
   'criarPartida',
+  'esperaRestante',
   'gerarNumeroAleatorio',
+  'letraDoNumero',
   'sortear',
+  'sortearCores',
   'sortearNumero',
+  'textoParaCantar',
   'verificarVencedor',
 ];
 

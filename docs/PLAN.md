@@ -11,9 +11,10 @@
 - [x] 4. Corrigir bugs A1 e A2: `gerarNumeroAleatorio(range)` agora devolve [1, range] (antes [0, range)); 75 possível
 - [x] 5. Implementar interface de jogo (botão Bingo, marcação manual, vitória/centro livre, 1–4 cartelas, nova partida) — see `jogo.html`
 - [x] 6. Alinhar README/páginas/CSS e limpeza (DevTools, `#instrucoes`, `og:image`, faixa 1–75)
-- [ ] 7. Manter testes de caracterização como regressão (steps 1–4)
+- [x] 7. Manter testes de caracterização como regressão (`verificaPosicao` removida em 2026-11-23, sem uso)
 
-## Fase 2 — multiplayer (adiada)
+## Fase 2 — multiplayer (em andamento, branch `multiplayer`)
 
+- [x] Painel da TV: quadro por letra, animações, automático e voz — `painel.html`
 - [ ] 8. Semente na URL + relógio: cada jogador no próprio celular, na mesma sala.
       Firebase é plano B apenas para jogo remoto.

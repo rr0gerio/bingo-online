@@ -17,13 +17,15 @@ Atualize ao fim de cada sessão. O próximo agente começa lendo este arquivo.
 - 2026-11-23 — Visual de `master.css` e `jogo.html` inspirado no DESIGN.md do Notion (espaçamento, bordas, tipografia), mantendo o roxo, a Montserrat e o logo. 51 testes passando; conferido no Chrome em 1440 e 390 px.
 - 2026-11-23 — Identidade nova e única: nome "Bingo", coral, creme, grade de lanchonete retrô, Titan One e Roboto. Removido tudo de Sec4U. Imagens próprias: `bingo.svg`, `icone.svg` e `compartilhar.png`. Inspiração só em cores e clima, sem elementos de marcas de terceiros (sem autorização).
 - 2026-11-23 — PRs 1 e 2 (`setup-agentes`) mesclados na `master`. Limpeza na branch `multiplayer`: `src/.DS_Store` fora do git, comentários e imports obsoletos removidos de `tests/helpers.js` e `tests/main.test.js`; 55 testes passando.
+- 2026-11-23 — Limpeza autorizada: `setup-bingo.sh`, branch `setup-agentes` (local e remota) e `verificaPosicao` (com 3 testes) removidos.
+- 2026-11-23 — Painel da TV: `src/pages/painel.html`, `src/css/painel.css`, `src/js/painel.js` e `src/js/globo.js`; funções novas em `logica.js` com `tests/logica.painel.test.js`; 63 testes passando. Conferido no Chrome headless via `file://` (1280 a 3840 px e 390 px, rodada de 75, automático, nova rodada). Som real da voz e TV física ainda não testados.
 
 ## Em andamento
 - Branch `multiplayer` criada a partir da `master`; plano da fase 2 a aprovar.
 - A skill de geração de imagem do usuário não ficou pronta; `bingo.svg` segue como ilustração.
 
 ## Próximo passo
-- Passo 7 do docs/PLAN.md e, depois, a fase 2 (semente na URL).
+- Testar o painel na TV. Depois: decidir sobre `sorteador.html` (o painel o substitui?) e a sala por semente na URL.
 
 ## Decisões tomadas
 - AGENTS.md é a fonte única de instruções; CLAUDE.md apenas aponta para ele.

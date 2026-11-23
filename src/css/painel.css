@@ -1,0 +1,441 @@
+/* Painel da TV (painel.html). Pensado para 16:9; em telas estreitas empilha. */
+.painel{
+    --vao: clamp(5px, 0.55vw, 12px);
+    --margem: clamp(12px, 2vmin, 36px);
+    /* 15 números + a letra na largura; 5 linhas + o topo na altura. */
+    --casa: min(calc((100vw - 2 * var(--margem) - 2 * var(--miolo) - 15 * var(--vao)) / 16.02),
+                calc((100vh - 2 * var(--margem) - 2 * var(--miolo) - 5 * var(--vao) - var(--topo)) / 5.05));
+    --miolo: clamp(8px, 1vmin, 20px);
+    --topo: clamp(250px, 37vh, 800px);
+    height: 100vh;
+    min-height: 560px;
+    padding: var(--margem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--vao);
+    overflow: hidden;
+}
+.so-leitor{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Topo: globo, bola da vez e controles */
+.topo{
+    flex: 1 1 var(--topo);
+    min-height: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) minmax(300px, 34vw);
+    align-items: center;
+    gap: clamp(16px, 3vw, 64px);
+}
+.globo{
+    --lado: calc(var(--topo) - 2 * var(--vao));
+    position: relative;
+    width: var(--lado);
+    height: var(--lado);
+    border: clamp(4px, 0.5vmin, 8px) solid var(--tinta);
+    border-radius: 50%;
+    background: var(--papel);
+    box-shadow: 0 clamp(5px, 1vmin, 12px) 0 var(--coral);
+}
+.globo canvas{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.globo-brilho{
+    position: absolute;
+    inset: 7%;
+    border: clamp(5px, 0.9vmin, 14px) solid transparent;
+    border-top-color: var(--tom);
+    border-radius: 50%;
+    transform: rotate(-42deg);
+    opacity: 0.8;
+    pointer-events: none;
+}
+.globo.agitando{
+    animation: tremer 0.22s ease-in-out infinite;
+}
+@keyframes tremer{
+    0%, 100%{ transform: rotate(0) translateY(0); }
+    25%{ transform: rotate(-1.6deg) translateY(-3px); }
+    75%{ transform: rotate(1.6deg) translateY(2px); }
+}
+.palco{
+    display: grid;
+    place-items: center;
+}
+.soquete{
+    --d: calc(var(--topo) * 0.78);
+    width: var(--d);
+    height: var(--d);
+    display: grid;
+    place-items: center;
+    align-content: center;
+    border: clamp(4px, 0.5vmin, 8px) dashed var(--linha-forte);
+    border-radius: 50%;
+    background: var(--papel);
+    color: var(--linha-forte);
+    font-family: 'Titan One', 'Arial Rounded MT Bold', sans-serif;
+    font-size: calc(var(--d) * 0.36);
+    line-height: 0.95;
+}
+.soquete span{
+    font-family: inherit;
+}
+.soquete .letra-atual{
+    color: var(--destaque);
+    font-size: 0.6em;
+}
+.soquete.cheio{
+    border-style: solid;
+    border-color: var(--cor);
+    color: var(--tinta);
+}
+
+/* Bolinha: cor, contorno escuro e disco branco, como em bingo.svg */
+.bola{
+    position: relative;
+    width: var(--d);
+    height: var(--d);
+    display: grid;
+    place-items: center;
+    border: max(2px, calc(var(--d) * 0.045)) solid var(--tinta);
+    border-radius: 50%;
+    background: var(--cor);
+}
+.bola::after{
+    content: "";
+    position: absolute;
+    top: 5%;
+    left: 13%;
+    width: 24%;
+    height: 12%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    transform: rotate(-38deg);
+}
+.bola-disco{
+    width: 76%;
+    height: 76%;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    border: max(1.5px, calc(var(--d) * 0.03)) solid var(--tinta);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--tinta);
+    font-family: 'Titan One', 'Arial Rounded MT Bold', sans-serif;
+    font-size: calc(var(--d) * 0.3);
+    line-height: 1;
+}
+.bola-disco small{
+    font-family: inherit;
+    font-size: 0.5em;
+}
+.voadora{
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    will-change: transform;
+}
+.confete{
+    position: fixed;
+    z-index: 11;
+    top: 0;
+    left: 0;
+    width: clamp(8px, 1.1vmin, 18px);
+    height: clamp(8px, 1.1vmin, 18px);
+    border-radius: 3px;
+    background: var(--cor);
+    pointer-events: none;
+}
+
+/* Controles */
+.lateral{
+    display: grid;
+    gap: clamp(8px, 1.5vh, 22px);
+    align-content: center;
+}
+.historico{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.contagem{
+    white-space: nowrap;
+    font-size: clamp(0.95rem, 1.5vw, 4rem);
+}
+.contagem b{
+    font-family: 'Titan One', 'Arial Rounded MT Bold', sans-serif;
+    font-size: 1.6em;
+    font-weight: 400;
+    color: var(--destaque);
+    font-variant-numeric: tabular-nums;
+}
+.anteriores{
+    display: flex;
+    gap: 6px;
+    min-height: clamp(38px, 3.4vw, 140px);
+}
+.anteriores .bola{
+    --d: clamp(38px, 3.4vw, 140px);
+}
+.gordo{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: clamp(48px, 7vh, 160px);
+    padding: 8px 20px;
+    border: 2px solid var(--tinta);
+    border-radius: 16px;
+    background: var(--papel);
+    color: var(--tinta);
+    box-shadow: 0 5px 0 var(--tinta);
+    font-family: 'Titan One', 'Arial Rounded MT Bold', sans-serif;
+    font-size: clamp(1.25rem, 2vw, 5rem);
+    line-height: 1.1;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: transform 0.08s, box-shadow 0.08s;
+}
+.gordo > span:first-child{
+    position: relative;
+    z-index: 1;
+    font-family: inherit;
+}
+.gordo:hover{
+    background: var(--superficie);
+}
+.gordo:active{
+    transform: translateY(5px);
+    box-shadow: 0 0 0 var(--tinta);
+}
+.gordo.primario{
+    background: var(--destaque);
+    color: #fff;
+}
+.gordo.primario:hover{
+    background: var(--destaque-escuro);
+}
+.gordo.pequeno{
+    min-height: 44px;
+    padding: 4px 14px;
+    border-radius: 12px;
+    box-shadow: 0 4px 0 var(--tinta);
+    font-size: clamp(0.9rem, 1.1vw, 2.6rem);
+}
+.gordo.pequeno:active{
+    box-shadow: 0 0 0 var(--tinta);
+}
+.gordo.primario[aria-disabled="true"]{
+    cursor: default;
+    background: var(--linha);
+    color: var(--tinta-suave);
+}
+.progresso{
+    position: absolute;
+    inset: 0;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.22);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+#sortear{
+    overflow: hidden;
+}
+.opcoes, .acoes, .tempo{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+}
+.tempo{
+    gap: 8px;
+}
+.tempo output{
+    min-width: 3em;
+    text-align: center;
+    font-weight: 700;
+    font-size: clamp(1rem, 1.2vw, 2.8rem);
+    font-variant-numeric: tabular-nums;
+}
+.chave{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    background: none;
+    color: var(--tinta);
+    font-size: clamp(1rem, 1.2vw, 2.8rem);
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+.chave-trilho{
+    position: relative;
+    flex: none;
+    width: calc(2em + 12px);
+    height: calc(1em + 10px);
+    border: 2px solid var(--tinta);
+    border-radius: 1em;
+    background: var(--linha);
+    transition: background 0.2s;
+}
+.chave-trilho::after{
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(1em + 2px);
+    height: calc(1em + 2px);
+    border: 2px solid var(--tinta);
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.35s cubic-bezier(0.34, 1.9, 0.64, 1);
+}
+.chave[aria-checked="true"] .chave-trilho{
+    background: #58ab3d;
+}
+.chave[aria-checked="true"] .chave-trilho::after{
+    transform: translateX(calc(1em + 2px));
+}
+.chave:disabled{
+    color: var(--tinta-suave);
+    cursor: not-allowed;
+}
+.aviso{
+    color: var(--destaque-escuro);
+    font-size: clamp(0.875rem, 1vw, 2.4rem);
+}
+
+/* Quadro por letra */
+.quadro{
+    align-self: center;
+    display: grid;
+    gap: var(--vao);
+    padding: var(--miolo);
+    border: 2px solid var(--coral);
+    border-radius: var(--raio-cartao);
+    background: var(--papel);
+    box-shadow: 0 clamp(5px, 0.8vmin, 10px) 0 var(--coral);
+}
+.linha-letra{
+    display: grid;
+    grid-template-columns: repeat(16, var(--casa));
+    gap: var(--vao);
+}
+.letra{
+    height: var(--casa);
+    display: grid;
+    place-items: center;
+    border-radius: 22%;
+    background: var(--destaque);
+    color: #fff;
+    font-family: 'Titan One', 'Arial Rounded MT Bold', sans-serif;
+    font-size: calc(var(--casa) * 0.62);
+    line-height: 1;
+}
+.casa{
+    height: var(--casa);
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--linha);
+    border-radius: 50%;
+    background: var(--superficie);
+    /* Apagado de propósito: só o sorteado precisa saltar aos olhos. */
+    color: #8a8371;
+    font-size: calc(var(--casa) * 0.38);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+.casa.saiu{
+    border-color: transparent;
+    background: none;
+}
+.casa .bola{
+    --d: var(--casa);
+}
+.casa .bola-disco{
+    font-size: calc(var(--d) * 0.34);
+}
+.casa.recente .bola{
+    animation: pulsar 1.4s ease-in-out infinite;
+}
+@keyframes pulsar{
+    0%, 100%{ box-shadow: 0 0 0 0 rgba(255, 84, 64, 0.65); }
+    60%{ box-shadow: 0 0 0 calc(var(--casa) * 0.2) rgba(255, 84, 64, 0); }
+}
+
+dialog{
+    margin: auto;
+    width: min(32em, calc(100vw - 32px));
+    padding: 28px;
+    border: 2px solid var(--tinta);
+    border-radius: var(--raio-cartao);
+    background: var(--papel);
+    color: var(--tinta);
+    font-size: clamp(1rem, 1.2vw, 2.4rem);
+    box-shadow: 0 8px 0 var(--coral);
+}
+dialog::backdrop{
+    background: rgba(29, 29, 27, 0.5);
+}
+dialog p{
+    margin: 8px 0 20px;
+}
+
+@media (max-width: 800px){
+    .painel{
+        --topo: 200px;
+        --casa: min(72px, calc((100vw - 2 * var(--margem) - 2 * var(--miolo) - 4px - 5 * var(--vao)) / 6));
+        height: auto;
+        min-height: 100vh;
+        gap: 20px;
+        overflow: visible;
+    }
+    .topo{
+        flex: none;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 16px;
+    }
+    .globo{
+        --lado: min(200px, 48vw);
+    }
+    .soquete{
+        --d: min(150px, 34vw);
+    }
+    .lateral{
+        grid-column: 1 / -1;
+    }
+    .linha-letra{
+        grid-template-columns: repeat(6, var(--casa));
+    }
+    .letra{
+        grid-row: span 3;
+        height: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .globo.agitando, .casa.recente .bola{
+        animation: none;
+    }
+    .gordo, .chave-trilho, .chave-trilho::after{
+        transition: none;
+    }
+}
+
+[hidden]{
+    display: none !important;
+}

@@ -17,6 +17,8 @@ const BingoLogica = (function () {
   const MAX_NUMERO = 75;
   const MAX_CARTELAS = 4;
   const CENTRO = 2;
+  const LETRAS = ['B', 'I', 'N', 'G', 'O'];
+  const LETRAS_FALADAS = { B: 'Bê', I: 'I', N: 'Ene', G: 'Gê', O: 'Ó' };
 
   /**
    * Inteiro aleatório em [1, range].
@@ -122,7 +124,34 @@ const BingoLogica = (function () {
     return padrao ? { ...partida, vencedor: { cartela: indice, padrao } } : partida;
   }
 
+  /** Letra da coluna do número (1–15 B, 16–30 I, ...); null fora de 1 a 75. */
+  function letraDoNumero(numero) {
+    if (!Number.isInteger(numero) || numero < 1 || numero > MAX_NUMERO) return null;
+    return LETRAS[Math.floor((numero - 1) / NUMEROS_POR_COLUNA)];
+  }
+
+  /** Texto para a voz cantar o número, com a letra por extenso. */
+  function textoParaCantar(numero) {
+    const letra = letraDoNumero(numero);
+    return letra === null ? '' : `${LETRAS_FALADAS[letra]}, ${numero}`;
+  }
+
+  /** Índice de cor (0..quantidade-1) de cada um dos 75 números, sortido e equilibrado. */
+  function sortearCores(quantidade) {
+    const cores = intervalo(0, MAX_NUMERO - 1).map((i) => i % quantidade);
+    return escolherDistintos(cores, cores.length);
+  }
+
+  /** Quanto falta para o próximo sorteio automático; 0 se o intervalo já passou. */
+  function esperaRestante(intervaloMs, decorridoMs) {
+    return Math.max(0, intervaloMs - decorridoMs);
+  }
+
   return {
+    letraDoNumero,
+    textoParaCantar,
+    sortearCores,
+    esperaRestante,
     gerarNumeroAleatorio,
     criarCartela,
     sortearNumero,
