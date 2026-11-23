@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:url" content="https://rr0gerio.github.io/bingo-online/src/pages/painel.html" />
+    <meta property="og:title" content="Bingo" />
+    <meta property="og:site_name" content="Bingo" />
+    <meta property="og:description" content="Bingo para jogar entre amigos." />
+    <meta property="og:image" content="https://rr0gerio.github.io/bingo-online/src/images/compartilhar.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type" content="website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f3f0df">
+    <link rel="stylesheet" href="../css/master.css">
+    <link rel="stylesheet" href="../css/painel.css">
+    <link rel="icon" href="../images/icone.svg" type="image/svg+xml" />
+    <title>Bingo | Painel da TV</title>
+</head>
+<body>
+    <main class="painel">
+        <h1 class="so-leitor">Painel de sorteio do Bingo</h1>
+
+        <section class="topo">
+            <div class="globo" id="globo">
+                <canvas id="bolas" aria-hidden="true"></canvas>
+            </div>
+
+            <div class="palco">
+                <div class="soquete" id="soquete" aria-hidden="true"><span>?</span></div>
+                <p class="so-leitor" id="mensagem" role="status"></p>
+            </div>
+
+            <div class="lateral">
+                <div class="historico">
+                    <p class="contagem"><b id="contagem">0</b> de 75</p>
+                    <ol class="anteriores" id="anteriores" aria-label="Últimos números"></ol>
+                </div>
+
+                <button type="button" class="gordo primario" id="sortear">
+                    <span id="sortear-texto">Sortear</span>
+                    <span class="progresso" id="progresso" aria-hidden="true"></span>
+                </button>
+
+                <div class="opcao">
+                    <button type="button" class="chave" id="automatico" role="switch" aria-checked="false">
+                        <span class="chave-trilho" aria-hidden="true"></span>Automático
+                    </button>
+                    <div class="tempo" role="group" aria-label="Tempo entre sorteios">
+                        <button type="button" class="gordo" id="menos" aria-label="Diminuir o tempo">−</button>
+                        <output id="intervalo">8 s</output>
+                        <button type="button" class="gordo" id="mais" aria-label="Aumentar o tempo">+</button>
+                    </div>
+                </div>
+                <div class="opcao">
+                    <button type="button" class="chave" id="cantar" role="switch" aria-checked="true">
+                        <span class="chave-trilho" aria-hidden="true"></span>Cantar números
+                    </button>
+                    <button type="button" class="gordo" id="conferir">Conferir Bingo</button>
+                </div>
+                <p class="aviso" id="aviso" role="status" hidden></p>
+
+                <div class="acoes">
+                    <button type="button" class="gordo" id="tela-cheia" aria-pressed="false">Tela cheia</button>
+                    <button type="button" class="gordo" id="nova">Nova rodada</button>
+                    <a href="../../index.html" class="gordo">Início</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="quadro" id="quadro" aria-label="Números sorteados por letra"></section>
+    </main>
+
+    <dialog id="confirmar" aria-labelledby="confirmar-titulo">
+        <h2 id="confirmar-titulo">Começar outra rodada?</h2>
+        <p>Os números sorteados até agora serão apagados.</p>
+        <div class="acoes">
+            <button type="button" class="gordo" id="cancelar" autofocus>Continuar esta</button>
+            <button type="button" class="gordo primario" id="confirmar-nova">Nova rodada</button>
+        </div>
+    </dialog>
+
+    <dialog id="conferencia" aria-labelledby="conferencia-titulo">
+        <h2 id="conferencia-titulo">Conferir Bingo</h2>
+        <form id="conferencia-form" novalidate>
+            <label for="codigo">Código da cartela</label>
+            <div class="campo">
+                <input id="codigo" type="text" maxlength="7" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="resultado">
+                <button type="submit" class="gordo primario">Conferir</button>
+            </div>
+        </form>
+        <p class="resultado" id="resultado" role="status"></p>
+        <div id="cartela-conferida"></div>
+        <button type="button" class="gordo" id="fechar-conferencia">Fechar</button>
+    </dialog>
+
+    <script src="../js/logica.js"></script>
+    <script src="../js/globo.js"></script>
+    <script src="../js/painel.js"></script>
+</body>
+</html>

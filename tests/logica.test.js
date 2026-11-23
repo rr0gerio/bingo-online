@@ -18,19 +18,6 @@ const TODOS = Array.from({ length: 75 }, (_, i) => i + 1);
 const semear = (semente, fn) => comMathRandom(criarRng(semente), fn);
 const ordenar = (lista) => [...lista].sort((a, b) => a - b);
 
-function partidaFixa(extra = {}) {
-  return { cartelas: [{ numeros: CARTELA, marcados: [] }], sorteados: [], vencedor: null, ...extra };
-}
-
-/** Congela em profundidade: em modo estrito, qualquer alteração lança erro. */
-function congelar(valor) {
-  if (valor && typeof valor === 'object') {
-    Object.values(valor).forEach(congelar);
-    Object.freeze(valor);
-  }
-  return valor;
-}
-
 describe('criarCartela', () => {
   const cartelas = semear(1, () => Array.from({ length: 500 }, () => logica.criarCartela()));
 
@@ -64,12 +51,11 @@ describe('criarCartela', () => {
 describe('sorteio', () => {
   test('75 sorteios saem sem repetir e cobrem de 1 a 75', () => {
     for (let semente = 0; semente < 50; semente++) {
-      const partida = semear(semente, () => {
-        let p = logica.criarPartida(1);
-        for (let i = 0; i < 75; i++) p = logica.sortear(p);
-        return p;
+      const sorteados = [];
+      semear(semente, () => {
+        for (let i = 0; i < 75; i++) sorteados.push(logica.sortearNumero(sorteados));
       });
-      assert.deepEqual(ordenar(partida.sorteados), TODOS);
+      assert.deepEqual(ordenar(sorteados), TODOS);
     }
   });
 
@@ -80,10 +66,10 @@ describe('sorteio', () => {
     }
   });
 
-  test('depois dos 75, devolve null e a partida não muda', () => {
+  test('depois dos 75, devolve null; a lista recebida não muda', () => {
     assert.equal(logica.sortearNumero(TODOS), null);
-    const partida = partidaFixa({ sorteados: TODOS });
-    assert.equal(logica.sortear(partida), partida);
+    const lista = Object.freeze([1, 2, 3]);
+    assert.doesNotThrow(() => logica.sortearNumero(lista));
   });
 
   test('a primeira bola pode ser qualquer número, com frequência parecida (bug A1)', () => {
@@ -129,92 +115,5 @@ describe('verificarVencedor', () => {
 
   test('cartela sem marcas não vence, mesmo com tudo sorteado', () => {
     assert.equal(logica.verificarVencedor(CARTELA, [], TODOS), null);
-  });
-});
-
-describe('criarPartida', () => {
-  test('aceita de 1 a 4 cartelas e começa limpa', () => {
-    for (const quantidade of [1, 2, 3, 4]) {
-      const partida = semear(quantidade, () => logica.criarPartida(quantidade));
-      assert.equal(partida.cartelas.length, quantidade);
-      assert.ok(partida.cartelas.every((c) => c.marcados.length === 0));
-      assert.deepEqual(partida.sorteados, []);
-      assert.equal(partida.vencedor, null);
-    }
-  });
-
-  test('recusa outras quantidades', () => {
-    for (const invalida of [0, 5, -1, 1.5, '2', NaN, undefined]) {
-      assert.throws(() => logica.criarPartida(invalida), RangeError, String(invalida));
-    }
-  });
-
-  test('cada nova partida gera cartelas novas', () => {
-    const [a, b] = semear(3, () => [logica.criarPartida(1), logica.criarPartida(1)]);
-    assert.notDeepEqual(a.cartelas[0].numeros, b.cartelas[0].numeros);
-  });
-});
-
-describe('alternarMarcacao', () => {
-  test('marca, desmarca e marca de novo sem perder o número', () => {
-    let partida = logica.alternarMarcacao(partidaFixa(), 0, 17);
-    assert.deepEqual(partida.cartelas[0].marcados, [17]);
-    partida = logica.alternarMarcacao(partida, 0, 17);
-    assert.deepEqual(partida.cartelas[0].marcados, []);
-    partida = logica.alternarMarcacao(partida, 0, 17);
-    assert.deepEqual(partida.cartelas[0].marcados, [17]);
-    assert.deepEqual(partida.cartelas[0].numeros, CARTELA);
-  });
-
-  test('só afeta a cartela escolhida', () => {
-    const cartela = { numeros: CARTELA, marcados: [] };
-    const partida = logica.alternarMarcacao(partidaFixa({ cartelas: [cartela, cartela] }), 1, 17);
-    assert.deepEqual(partida.cartelas.map((c) => c.marcados), [[], [17]]);
-  });
-
-  test('ignora número fora da cartela, centro livre e cartela inexistente', () => {
-    const partida = partidaFixa();
-    assert.equal(logica.alternarMarcacao(partida, 0, 75), partida);
-    assert.equal(logica.alternarMarcacao(partida, 0, null), partida);
-    assert.equal(logica.alternarMarcacao(partida, 9, 17), partida);
-  });
-});
-
-describe('cantarBingo', () => {
-  const LINHA = [1, 16, 31, 46, 61];
-  const pronta = () => partidaFixa({ cartelas: [{ numeros: CARTELA, marcados: LINHA }], sorteados: LINHA });
-
-  test('válido registra cartela e padrão', () => {
-    const { vencedor } = logica.cantarBingo(pronta(), 0);
-    assert.equal(vencedor.cartela, 0);
-    assert.equal(vencedor.padrao.tipo, 'linha');
-    assert.equal(vencedor.padrao.numero, 1);
-  });
-
-  test('inválido não muda a partida, que continua', () => {
-    const semSorteio = { ...pronta(), sorteados: [] };
-    assert.equal(logica.cantarBingo(semSorteio, 0), semSorteio);
-    assert.equal(logica.cantarBingo(semSorteio, 9), semSorteio);
-    assert.equal(logica.sortear(semSorteio).sorteados.length, 1);
-  });
-
-  test('o primeiro Bingo encerra: nada mais altera a partida', () => {
-    const fim = logica.cantarBingo(pronta(), 0);
-    assert.equal(logica.sortear(fim), fim);
-    assert.equal(logica.alternarMarcacao(fim, 0, 17), fim);
-    assert.equal(logica.cantarBingo(fim, 0), fim);
-  });
-});
-
-test('nenhuma função altera a partida recebida', () => {
-  const LINHA = [1, 16, 31, 46, 61];
-  const partida = congelar(
-    partidaFixa({ cartelas: [{ numeros: CARTELA, marcados: LINHA }], sorteados: LINHA }),
-  );
-  assert.doesNotThrow(() => {
-    logica.sortear(partida);
-    logica.alternarMarcacao(partida, 0, 17);
-    logica.alternarMarcacao(partida, 0, 1);
-    logica.cantarBingo(partida, 0);
   });
 });

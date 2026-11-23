@@ -13,14 +13,19 @@ const vm = require('node:vm');
 
 const caminho = path.join(__dirname, '..', 'src', 'js', 'logica.js');
 const FUNCOES = [
-  'alternarMarcacao',
-  'cantarBingo',
+  'cartelaDoCodigo',
+  'conferirCodigo',
   'criarCartela',
-  'criarPartida',
+  'criarCodigo',
+  'descreverPadrao',
+  'esperaRestante',
   'gerarNumeroAleatorio',
-  'sortear',
+  'letraDoNumero',
+  'restaurarCartelas',
+  'restaurarSorteio',
+  'sortearCores',
   'sortearNumero',
-  'verificaPosicao',
+  'textoParaCantar',
   'verificarVencedor',
 ];
 
@@ -32,7 +37,7 @@ describe('carregamento de logica.js', () => {
 
     const nomes = vm.runInContext('Object.keys(BingoLogica).sort().join()', contexto);
     assert.equal(nomes, FUNCOES.join());
-    assert.equal(vm.runInContext('BingoLogica.verificaPosicao(5)', contexto), 1);
+    assert.equal(vm.runInContext('BingoLogica.gerarNumeroAleatorio(1)', contexto), 1);
   });
 
   test('só expõe BingoLogica, sem funções soltas no escopo global', () => {

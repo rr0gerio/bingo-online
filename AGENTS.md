@@ -20,17 +20,17 @@ e sorteia números aleatoriamente. O jogador escolhe até 4 cartelas por partida
 - Cartela: grade 5x5, 24 números, centro livre.
 - Faixa de números: 1 a 75, em 5 colunas de 15 (1–15, 16–30, 31–45, 46–60, 61–75). O zero é explicitamente rejeitado.
 - Padrões de vitória: linha, coluna, diagonal e quatro cantos; o centro livre conta como marcado. Implementado em `BingoLogica.verificarVencedor`.
-- Sorteio manual, por clique em "Sortear", uniforme de 1 a 75, sem repetir número.
+- Sorteio uniforme de 1 a 75, sem repetir número, no painel da TV (`src/pages/painel.html`): por clique em "Sortear" ou automático, de 5 a 30 s.
 
 ## Decisões de design (Fase 1)
 - Sorteio uniforme de 1 a 75. A cartela usa faixas por coluna; o sorteio não.
-- Marcação manual; o botão "Bingo" valida o padrão contra os números realmente sorteados.
+- Marcação manual no celular; o painel valida o padrão contra os números realmente sorteados (o que foi marcado não chega ao painel).
 - Centro livre conta como marcado em linha, coluna e diagonais.
-- O primeiro que cantar Bingo encerra a partida; "Nova partida" reinicia.
+- O primeiro que cantar Bingo encerra a partida; "Nova rodada" reinicia.
 - Cada jogador pode usar de 1 a 4 cartelas.
-- Sorteio por clique, sem timer.
+- O painel da TV tem modo automático e voz (Web Speech API), ambos liga/desliga. A partida em um só dispositivo (`jogo.html`) foi removida em 2026-11-23.
 - Lógica pura em `src/js/logica.js`, testada com `node --test`, sem dependências.
-- Fase 2 (adiada): cada jogador no próprio celular, na mesma sala, via semente na URL + relógio. Firebase é plano B apenas para jogo remoto.
+- Fase 2: todos na mesma sala. O painel da TV sorteia; cada jogador marca no próprio celular (`cartela.html`). Cada cartela tem um código de 5 caracteres que a recria em qualquer aparelho; o painel confere o Bingo pelo código contra os números sorteados. Sem rede, semente no sorteio ou relógio. Mudar `criarCartela` ou o código invalida cartelas já abertas (há teste com valor fixo). Firebase é plano B apenas para jogo remoto.
 
 ## Convenções
 - Simplicidade primeiro: manter JS/CSS/HTML puros, sem dependências novas sem perguntar.

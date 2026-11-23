@@ -20,6 +20,28 @@
     <link rel="icon" href="../images/icone.svg" type="image/svg+xml" />
     
     <title>Bingo | Cartela</title>
+    <style>
+        #cartela article + article { margin-top: 32px; }
+        .cartela-topo { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 0 6px; }
+        .cartela-topo h2 { font-size: 1.125rem; }
+        .codigo { color: var(--tinta-suave); }
+        .codigo strong { padding: 2px 8px; border-radius: 6px; background: var(--tom); color: var(--tinta); font-size: 1.25rem; letter-spacing: 0.12em; user-select: all; }
+        [hidden] { display: none !important; }
+        dialog { margin: auto; width: min(420px, calc(100vw - 32px)); padding: 24px; border: 2px solid var(--tinta); border-radius: var(--raio-cartao); background: var(--papel); color: var(--tinta); box-shadow: 0 8px 0 var(--coral); }
+        dialog::backdrop { background: rgba(29, 29, 27, 0.5); }
+        dialog p { margin: 8px 0 16px; }
+        dialog .menu-button { width: 100%; }
+        dialog .menu-button + .menu-button { margin-top: 10px; }
+        @media (max-width: 800px) {
+            .jogando .container { width: 100%; padding: 0; align-items: flex-start; }
+            .jogando .main-card { padding: 16px 12px; gap: 16px; border: 0; border-radius: 0; box-shadow: none; min-height: 100vh; align-content: start; }
+            .jogando .division { gap: 12px; }
+            .jogando h1 { font-size: 1.375rem; }
+            .jogando .subtitulo { margin-top: 2px; font-size: 1rem; }
+            .jogando .jogador-posit-menu { margin-top: 12px; gap: 8px; }
+            .jogando .menu-button { padding: 8px 12px; font-size: 0.9375rem; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -27,14 +49,17 @@
             <div class="division card-left">
                 
                 <div class="menu" id="menu-cartela">
-                    <h1>Clique no botão abaixo para gerar uma cartela</h1>
-                    <p class="subtitulo">Boa sorte!</p>
+                    <h1>Suas cartelas</h1>
+                    <p class="subtitulo">Escolha de 1 a 4 e marque os números que saírem na TV. Boa sorte!</p>
                     <form action="">
                         <ul class="jogador-posit-menu">
                             <li>
 
                                 <input type="button" id="gerar" value="Jogar!" class="menu-button primario">
                             </li>
+                        <li>
+                            <input type="button" id="nova" value="Nova rodada" class="menu-button" hidden>
+                        </li>
                         <li>
                             <a href="../../index.html" class="menu-button">Voltar ao início</a>
                         </li>
@@ -43,13 +68,13 @@
                 </div>
                 <details id="instrucoes">
                     <summary>Não sabe jogar? Não se preocupe!</summary>
-                    <p>Escolha de 1 a 4 cartelas. Os números são sorteados um por um, e você deve conferir se eles estão nas suas cartelas.</p>
+                    <p>Escolha de 1 a 4 cartelas. Os números são sorteados um por um no painel da TV, e você deve conferir se eles estão nas suas cartelas.</p>
                     <p><b>Se um número sorteado estiver na sua cartela, marque-o com um clique.</b></p>
                     <ul>
                         <li><b>Cartela</b> – 24 números de 1 a 75, em uma grade de 5 linhas e 5 colunas. O centro é livre e conta como marcado.</li>
-                        <li><b>Marcar número</b> – É assinalar na cartela que um número foi sorteado. Número sorteado e não marcado não vale para o Bingo.</li>
+                        <li><b>Marcar número</b> – É assinalar na cartela que um número foi sorteado, para você perceber quando completar um padrão. O painel confere o Bingo pelos números que saíram.</li>
                         <li><b>Padrões</b> – Linha, coluna, diagonal ou os quatro cantos.</li>
-                        <li><b>Cantar Bingo</b> – É declarar vitória ao completar um padrão. O primeiro Bingo válido encerra a partida.</li>
+                        <li><b>Cantar Bingo</b> – É declarar vitória ao completar um padrão. Diga o <b>código</b> da cartela para quem está no painel conferir. O primeiro Bingo válido encerra a partida.</li>
                     </ul>
                 </details>
             </div>
@@ -59,6 +84,13 @@
             
         </div>
     </div>
+    <dialog id="nova-rodada" aria-labelledby="nova-titulo">
+        <h2 id="nova-titulo">Começar outra rodada?</h2>
+        <p>As marcações serão apagadas.</p>
+        <button type="button" class="menu-button primario" id="manter">Jogar com as mesmas cartelas</button>
+        <button type="button" class="menu-button" id="trocar">Trocar de cartelas</button>
+        <button type="button" class="menu-button" id="cancelar" autofocus>Continuar esta rodada</button>
+    </dialog>
     <script src="../js/logica.js"></script>
     <script src="../js/gerarCartela.js"></script>
 </body>

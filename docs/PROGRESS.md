@@ -16,13 +16,20 @@ Atualize ao fim de cada sessão. O próximo agente começa lendo este arquivo.
 - 2026-11-23 — Passo 6 concluído: `lang`, `og:url`/`og:image`, instruções visíveis em `cartela.html`, README e `AGENTS.md` atualizados; bloqueio de DevTools desligado (`main.js` apagado, com autorização).
 - 2026-11-23 — Visual de `master.css` e `jogo.html` inspirado no DESIGN.md do Notion (espaçamento, bordas, tipografia), mantendo o roxo, a Montserrat e o logo. 51 testes passando; conferido no Chrome em 1440 e 390 px.
 - 2026-11-23 — Identidade nova e única: nome "Bingo", coral, creme, grade de lanchonete retrô, Titan One e Roboto. Removido tudo de Sec4U. Imagens próprias: `bingo.svg`, `icone.svg` e `compartilhar.png`. Inspiração só em cores e clima, sem elementos de marcas de terceiros (sem autorização).
+- 2026-11-23 — PRs 1 e 2 (`setup-agentes`) mesclados na `master`. Limpeza na branch `multiplayer`: `src/.DS_Store` fora do git, comentários e imports obsoletos removidos de `tests/helpers.js` e `tests/main.test.js`; 55 testes passando.
+- 2026-11-23 — Limpeza autorizada: `setup-bingo.sh`, branch `setup-agentes` (local e remota) e `verificaPosicao` (com 3 testes) removidos.
+- 2026-11-23 — Painel da TV: `src/pages/painel.html`, `src/css/painel.css`, `src/js/painel.js` e `src/js/globo.js`; funções novas em `logica.js` com `tests/logica.painel.test.js`; 63 testes passando. Conferido no Chrome headless via `file://` (1280 a 3840 px e 390 px, rodada de 75, automático, nova rodada). Som real da voz e TV física ainda não testados.
+- 2026-11-23 — Painel revisado: layout em uma unidade (`--u`, tela = 160 x 90), bolas e textos centralizados, tudo menor. Rodada e preferências salvas em `localStorage` (`restaurarSorteio` confere os dados). `sorteador.html` e `sorteador.js` removidos, com autorização. 64 testes passando; conferido no Chrome headless de 320 a 3840 px.
+- 2026-11-23 — Sala: código da cartela e conferência em `logica.js` (`tests/logica.codigo.test.js`); `cartela.html` mostra o código, salva marcações e tem "Nova rodada"; painel com "Conferir Bingo" (pausa o automático; o primeiro Bingo válido encerra a rodada). 82 testes passando; fluxo completo conferido no Chrome headless com celular e TV em contextos separados.
+- 2026-11-23 — Removida, com autorização, a partida em um só dispositivo (`jogo.html`, `jogo.js`, `criarPartida`, `sortear`, `alternarMarcacao`, `cantarBingo` e testes). Menu com "Pegar minhas cartelas" e "Abrir painel da TV".
 
 ## Em andamento
-- Pull request da `setup-agentes` para a `master`, a ser aberto pelo usuário.
+- Branch `multiplayer` criada a partir da `master`; PR para a `master`; falta teste com TV e celulares de verdade.
 - A skill de geração de imagem do usuário não ficou pronta; `bingo.svg` segue como ilustração.
 
 ## Próximo passo
-- Passo 7 do docs/PLAN.md e, depois, a fase 2 (semente na URL).
+- Testar na TV (voz e tamanho) e em celulares; mesclar o PR.
+- Limite conhecido: um jogador pode gerar cartela nova no meio da rodada e o painel a aceita.
 
 ## Decisões tomadas
 - AGENTS.md é a fonte única de instruções; CLAUDE.md apenas aponta para ele.

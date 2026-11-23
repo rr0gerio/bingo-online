@@ -1,9 +1,7 @@
 'use strict';
 
 /**
- * Testes de CARACTERIZAÇÃO de `src/js/main.js` — travam o comportamento de
- * hoje (inclusive os bugs conhecidos) para que a extração do passo 3 não cause
- * regressão silenciosa.
+ * Testes de regressão de `gerarNumeroAleatorio` (`src/js/logica.js`).
  */
 
 const { describe, test, afterEach } = require('node:test');
@@ -19,39 +17,6 @@ afterEach(() => {
     mathRandomOriginal,
     'Math.random deve ser restaurado ao fim de cada teste',
   );
-});
-
-describe('verificaPosicao (caracterização)', () => {
-  // Tabela escrita de forma explícita: cinco linhas de 1..5, como na cartela.
-  const colunasDaCartela = [
-    1, 2, 3, 4, 5,
-    1, 2, 3, 4, 5,
-    1, 2, 3, 4, 5,
-    1, 2, 3, 4, 5,
-    1, 2, 3, 4, 5,
-  ];
-
-  test('devolve a coluna 1..5 em ciclo para as 25 posições da cartela', () => {
-    const observado = colunasDaCartela.map((_, indice) => main.verificaPosicao(indice));
-    assert.deepEqual(observado, colunasDaCartela);
-  });
-
-  test('o ciclo continua além da cartela (25 -> 1, 29 -> 5)', () => {
-    assert.equal(main.verificaPosicao(25), 1);
-    assert.equal(main.verificaPosicao(29), 5);
-  });
-
-  test('insumo do BUG A1: o índice reinicia a coluna a cada 5 bolas', () => {
-    // `src/js/sorteador.js` faz `verificaPosicao(numArr.length)` e usa o
-    // resultado como coluna da vez. As 75 bolas cobrem 1–75, mas a bola k
-    // (base 0) só pode cair na faixa da coluna (k mod 5) + 1; a ordem fica
-    // previsível e o sorteio não é uniforme. Este teste trava apenas o insumo
-    // do bug A1; o chamador será testado no passo 5.
-    assert.equal(main.verificaPosicao(4), 5);
-    assert.equal(main.verificaPosicao(5), 1, 'a 6ª bola volta para a coluna 1');
-    assert.equal(main.verificaPosicao(9), 5);
-    assert.equal(main.verificaPosicao(10), 1);
-  });
 });
 
 describe('gerarNumeroAleatorio (caracterização)', () => {

@@ -150,11 +150,6 @@ h1{
     border-color: var(--destaque-escuro);
     background: var(--destaque-escuro);
 }
-.menu-button.discreto{
-    border-color: transparent;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
 .menu-button:disabled, .menu-button:disabled:hover{
     border-color: var(--linha);
     background: var(--linha);
@@ -173,9 +168,6 @@ table{
     table-layout: fixed;
     border-collapse: separate;
     border-spacing: 6px;
-}
-#cartela table + table{
-    margin-top: 24px;
 }
 th{
     color: var(--destaque);
@@ -206,13 +198,10 @@ td button{
 td:has(button:enabled):hover{
     border-color: var(--destaque);
 }
-td.marked, td.sorteado{
+td.marked{
     border-color: var(--destaque);
     background: var(--destaque);
     color: #fff;
-}
-td.sorteado{
-    overflow-anchor: auto;
 }
 td.central{
     border-color: var(--coral);
