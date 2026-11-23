@@ -1,51 +1,55 @@
-function gerarCartela(){
-    // document.getElementById("menu-cartela").style = "display:none";
-    // document.getElementById("instrucoes").style = "display:block";
-    var tableSpace = document.getElementById("cartela");
-    tableSpace.innerHTML = "";
-    var table = document.createElement('table');
-    var tr;
-    var td;
-    var num; 
-    var numArr = [];
-    tr = document.createElement('tr');
-    tr.innerHTML= '<th> S </th><th> E </th><th> C </th><th> 4 </th><th> U </th>';
-    table.appendChild(tr);
-    for ( let i = 0; i < 5; i++){
-        tr = document.createElement('tr');
-        for ( let j = 0; j < 5; j++){
-            num = gerarNumeroAleatorio(75);
-            posicao = verificaPosicao(numArr.length)
-            min = ((posicao-1)*15)+1;
-            max = posicao*15;
-            if(numArr.indexOf(num) > -1 || num == 0 || num < min || num > max ){
-                j--;
-            }      
-            else{
-                numArr.push(num);
-                td = document.createElement('td');
-                if(numArr.length != 13){
-                    td.addEventListener("click",function(){
-                        this.classList.add("marked");
-                    });
-                }
-                if(numArr.length == 13){
-                    td.classList.add("central");
-                }
-                else{                
-                    td.innerHTML += "<h1> "+ num + "</h1>";
-                }
-                tr.appendChild(td);
-            }
-            
-        }
-        table.appendChild(tr);
-    }  
-    tableSpace.appendChild(table);
-    
-    document.getElementById("gerar").setAttribute("disabled","disabled");
-    console.log(numArr);
-}
-function verificaVencedor(){
+// Página do participante (cartela.html). As cartelas vêm de logica.js; a
+// conferência do Bingo é feita pelas pessoas, pois o sorteio é em outra página.
 
-}
+(function () {
+  'use strict';
+
+  const LETRAS = ['B', 'I', 'N', 'G', 'O'];
+  const MAX_CARTELAS = 4;
+
+  const elCartelas = document.getElementById('cartela');
+  const btGerar = document.getElementById('gerar');
+
+  function criarElemento(tag, propriedades = {}) {
+    return Object.assign(document.createElement(tag), propriedades);
+  }
+
+  function criarCasa(numero) {
+    const td = criarElemento('td');
+    if (numero === null) {
+      td.className = 'central';
+      td.setAttribute('aria-label', 'Centro livre');
+      return td;
+    }
+    const botao = criarElemento('button', { type: 'button', textContent: numero });
+    botao.setAttribute('aria-pressed', 'false');
+    botao.addEventListener('click', () => {
+      const marcado = td.classList.toggle('marked');
+      botao.setAttribute('aria-pressed', String(marcado));
+    });
+    td.append(botao);
+    return td;
+  }
+
+  function criarTabela(numeros) {
+    const tabela = criarElemento('table');
+    const cabecalho = criarElemento('tr');
+    cabecalho.append(...LETRAS.map((letra) => criarElemento('th', { textContent: letra, scope: 'col' })));
+    tabela.append(cabecalho);
+    numeros.forEach((linha) => {
+      const tr = criarElemento('tr');
+      tr.append(...linha.map(criarCasa));
+      tabela.append(tr);
+    });
+    return tabela;
+  }
+
+  function gerarCartela() {
+    if (elCartelas.children.length >= MAX_CARTELAS) return;
+    elCartelas.append(criarTabela(BingoLogica.criarCartela()));
+    btGerar.value = 'Mais uma cartela';
+    btGerar.disabled = elCartelas.children.length >= MAX_CARTELAS;
+  }
+
+  btGerar.addEventListener('click', gerarCartela);
+})();

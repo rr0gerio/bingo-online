@@ -1,0 +1,19 @@
+# Plano
+
+> Ordem aprovada em 2026-11-23: testes antes da extração, para não haver regressão silenciosa.
+> Contexto e decisões em `AGENTS.md` ("Decisões de design (Fase 1)").
+
+## Fase 1 — núcleo em um dispositivo
+
+- [x] 1. Ler o código e preencher os campos pendentes do AGENTS.md (sem alterar código)
+- [x] 2. Criar `tests/` com PRNG semeado e testes de caracterização de `gerarNumeroAleatorio` e `verificaPosicao`
+- [x] 3. Extrair a lógica para funções puras em `src/js/logica.js`, sem mudar o comportamento
+- [x] 4. Corrigir bugs A1 e A2: `gerarNumeroAleatorio(range)` agora devolve [1, range] (antes [0, range)); 75 possível
+- [x] 5. Implementar interface de jogo (botão Bingo, marcação manual, vitória/centro livre, 1–4 cartelas, nova partida) — see `jogo.html`
+- [x] 6. Alinhar README/páginas/CSS e limpeza (DevTools, `#instrucoes`, `og:image`, faixa 1–75)
+- [ ] 7. Manter testes de caracterização como regressão (steps 1–4)
+
+## Fase 2 — multiplayer (adiada)
+
+- [ ] 8. Semente na URL + relógio: cada jogador no próprio celular, na mesma sala.
+      Firebase é plano B apenas para jogo remoto.

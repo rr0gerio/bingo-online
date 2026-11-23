@@ -1,0 +1,7 @@
+.DS_Store
+.env
+
+# Ferramentas de agentes (instaladas localmente)
+.claude/skills/
+.taste-skill/
+.playwright-cli/

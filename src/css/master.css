@@ -1,160 +1,242 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
-*{margin:0;border:0;padding:0;box-sizing:border-box;line-height: 1.5em;}
-ul,ol{list-style: none;}
-a:visited,a:active,a:link,a:-webkit-any-link{text-decoration: none; display: block; color: #333}
-body{overflow-x:hidden;font-size: 100%;background:radial-gradient(transparent,#ddd);}
-header{font-family: 'Montserrat',sans-serif;}
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display: block;}
-h1{font-size: 2rem;}
-h3{color: #aaa; font-weight: 500;}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
 
+/* Espaçamento, bordas e tipografia inspirados no DESIGN.md do Notion
+   (awesome-design-md); cores, fonte e logo continuam do Bingo da Sec. */
+:root{
+    color-scheme: light;
+    --tinta: #24212e;
+    --tinta-suave: #5d5a68;
+    --papel: #ffffff;
+    --superficie: #f7f6fa;
+    --lavanda: #ece8fb;
+    --linha: #e4e1ea;
+    --linha-forte: #c9c4d4;
+    --roxo: #6a3be0;
+    --roxo-escuro: #5429bd;
+    --raio: 8px;
+    --raio-cartao: 12px;
+    --sombra: 0 24px 48px -8px rgba(15, 15, 35, 0.25);
+}
 
 *{
-    font-family: 'Montserrat', sans-serif;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    border: 0;
+    font-family: 'Montserrat', sans-serif;
 }
 body{
-    background-image: linear-gradient(-45deg, #67A7FA,#7781FC,#8958FE);
-    width: 100%;
-    min-height: 100vh;  
-    color: #333;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--tinta);
+    font-weight: 500;
+    line-height: 1.55;
+    background: linear-gradient(-45deg, #67A7FA, #7781FC, #8958FE) fixed;
 }
-body.home{
-    background-image: url(../images/happy_hour.png);
+ul, ol{
+    list-style: none;
 }
-.container{ 
-    margin: auto;
-    position: relative;
-    min-height:100vh;
+a{
+    color: inherit;
+    text-decoration: none;
+}
+h1, h2{
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    text-wrap: balance;
+}
+h1{
+    font-size: clamp(1.625rem, 4vw, 2.25rem);
+}
+.subtitulo{
+    margin-top: 8px;
+    color: var(--tinta-suave);
+    font-size: 1.125rem;
+}
+:focus-visible{
+    outline: 3px solid var(--tinta);
+    outline-offset: 2px;
+}
+
+/* Estrutura */
+.container{
     width: 90%;
-}
-
-#cartela{
-    width: fit-content;
+    min-height: 100vh;
     margin: auto;
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-table{
-    border-collapse: separate;
-    border-spacing: 12px 8px;
-}
-th{
-    font-size: 60px;
-    width: 100px;
-    height: 100px;
-}
-td {
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    border-radius: 5px;
-    margin:30px;
-    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.15);
-}
-
-td:hover{
-    border: solid 1px rgba(0, 0, 0, 0.1);
-    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-    cursor: pointer;
-}
-td.central:hover{
-    border: none;
-    box-shadow: none;
-    cursor: inherit;
-}
-td.central{
-    border: none;
-    box-shadow: none;
-}
-td.marked, td.sorteado{
-    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
-    background-image: linear-gradient(-47deg, #67A7FA,#7781FC,#8958FE);
-    border: none;
-    color:white !important;
-}
-
-
-
 .main-card{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: fit-content;
-    max-width: 1500px;
-    border-radius: 10px;    
-    padding: 70px 80px;
-    box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25);
-    background-color: rgba(255, 255, 255);
+    width: 100%;
+    max-width: 1200px;
+    padding: clamp(24px, 5vw, 64px);
     display: grid;
-    grid-template-columns: 48% 52%;
-}
-.card-right{
-    border-left: 1px solid rgba(0, 0, 0, 0.15);
-
-}
-.card-left{
-    /* border-right: 1px solid rgba(0, 0, 0, 0.15); */
-    padding-right: 16px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px;
+    border: 1px solid var(--linha);
+    border-radius: var(--raio-cartao);
+    background: var(--papel);
+    box-shadow: var(--sombra);
 }
 .division{
     display: grid;
     align-items: center;
+    align-content: center;
+    gap: 24px;
 }
-.menu-button{
-    background-color: white;
-    border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    height: 75px;
-    min-width: 110px;
-    font-size: 20px !important;
-    padding: 4px;
+.card-left{
+    padding-right: 16px;
 }
-
-.menu-button:hover{
-    border: solid 1px rgba(0, 0, 0, 0.1);
-    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-    cursor: pointer;
-}
-.jogador-posit-menu{
-    display: flex;
-    justify-content: space-around;
-}
-.jogador-posit-menu > li{
-    margin: 1em;
-}
-.jogador-posit-menu > li > a{
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    font-size: inherit !important;
-}
-#instrucoes{
-    display: none;
-}
-.home-gif{
-    margin: auto;
+.card-right{
+    padding-left: 32px;
+    border-left: 1px solid var(--linha);
 }
 .card-right-sorteador{
     max-height: 620px;
-    overflow-y: scroll;
+    align-content: start;
+    overflow-y: auto;
     overflow-anchor: none;
+}
+.home-gif{
+    max-width: 100%;
+    margin: auto;
+    border-radius: var(--raio-cartao);
+}
+
+/* Botões */
+.jogador-posit-menu{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+.menu-button{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 18px;
+    border: 1px solid var(--linha-forte);
+    border-radius: var(--raio);
+    background: var(--papel);
+    color: var(--tinta);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+.menu-button:hover{
+    background: var(--superficie);
+    border-color: var(--tinta-suave);
+}
+.menu-button.primario{
+    border-color: var(--roxo);
+    background: var(--roxo);
+    color: #fff;
+}
+.menu-button.primario:hover{
+    border-color: var(--roxo-escuro);
+    background: var(--roxo-escuro);
+}
+.menu-button.discreto{
+    border-color: transparent;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.menu-button:disabled, .menu-button:disabled:hover{
+    border-color: var(--linha);
+    background: var(--linha);
+    color: var(--tinta-suave);
+    cursor: not-allowed;
+}
+
+/* Cartelas e sorteio */
+#cartela{
+    width: 100%;
+    max-width: 540px;
+    margin: auto;
+}
+table{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 6px;
+}
+#cartela table + table{
+    margin-top: 24px;
+}
+th{
+    color: var(--roxo);
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    font-weight: 700;
+}
+td{
+    height: clamp(52px, 12vw, 80px);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    background: var(--papel);
+    text-align: center;
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+td button{
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+td:has(button:enabled):hover{
+    border-color: var(--roxo);
+}
+td.marked, td.sorteado{
+    border-color: var(--roxo);
+    background: linear-gradient(-47deg, #4f5fd6, #6a3be0);
+    color: #fff;
 }
 td.sorteado{
     overflow-anchor: auto;
 }
+td.central{
+    border-color: transparent;
+    background: var(--lavanda) url("../images/LogoSec4U.png") center / 88% auto no-repeat;
+}
 
-.central{
-    background-image: url("../images/LogoSec4U.png");
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    background-position: center;
+/* Instruções */
+#instrucoes{
+    color: var(--tinta-suave);
+}
+#instrucoes summary{
+    padding: 8px 0;
+    color: var(--tinta);
+    font-weight: 600;
+    cursor: pointer;
+}
+#instrucoes p, #instrucoes li{
+    margin-top: 8px;
+}
+
+@media (max-width: 800px){
+    .main-card{
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .card-left{
+        padding-right: 0;
+    }
+    .card-right{
+        padding-left: 0;
+        border-left: none;
+    }
+    .card-right-sorteador{
+        max-height: none;
+        overflow-y: visible;
+    }
 }

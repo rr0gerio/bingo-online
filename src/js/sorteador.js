@@ -1,41 +1,37 @@
-var numArr = [];
-var table = document.createElement('table');
-var tr = document.createElement('tr');
-tr.innerHTML= '<th> P </th><th> O </th><th> I </th><th> N </th><th> T </th>';
-table.appendChild(tr);
-function gerarTabelaSorteio(){
-    if(numArr.length == 0 || numArr.length%5 == 0){
-        tr = document.createElement('tr');
+// Página do sorteador (sorteador.html). Números em ordem de sorteio, 5 por
+// linha; a coluna é só visual e não limita o número.
+
+(function () {
+  'use strict';
+
+  const POR_LINHA = 5;
+  const btSortear = document.getElementById('sortear');
+  const tabela = document.createElement('table');
+  const sorteados = [];
+  let linha = null;
+
+  tabela.innerHTML = '<tr><th>P</th><th>O</th><th>I</th><th>N</th><th>T</th></tr>';
+  document.getElementById('cartela').append(tabela);
+
+  function mostrarNumero(numero) {
+    if (sorteados.length % POR_LINHA === 1) {
+      linha = document.createElement('tr');
+      tabela.append(linha);
     }
-    if(numArr.length == 75 ){
-        document.getElementById("sortear").setAttribute("disable","disable");
-        return;
-    }
-    var tableSpace = document.getElementById("cartela");
-    var td;
-    var num; 
-    
-    
-    num = gerarNumeroAleatorio(76);
-    posicao = verificaPosicao(numArr.length)
-    min = posicao == 1 ? 1 : ((posicao-1)*15)+1;
-    max = posicao == 1 ? 15: posicao*15;
-    if(numArr.length != 75 && numArr.indexOf(num) > -1 || num == 0 || num < min || num > max ){
-        gerarTabelaSorteio();
-    }
-    else{
-        numArr.push(num);
-        td = document.createElement('td');
-        td.innerHTML += "<h1> "+ num + "</h1>";
-        td.classList.add("sorteado");
-        tr.appendChild(td);
-    }
-    
-    
-    table.appendChild(tr);
-    
-    tableSpace.appendChild(table);
-    if(numArr.length == 75){
-        document.getElementById("sortear").setAttribute("disabled","disabled");
-    }
-}
+    const td = document.createElement('td');
+    td.className = 'sorteado';
+    td.textContent = numero;
+    linha.append(td);
+    td.scrollIntoView({ block: 'nearest' });
+  }
+
+  function sortear() {
+    const numero = BingoLogica.sortearNumero(sorteados);
+    if (numero === null) return;
+    sorteados.push(numero);
+    mostrarNumero(numero);
+    btSortear.disabled = sorteados.length === 75;
+  }
+
+  btSortear.addEventListener('click', sortear);
+})();
