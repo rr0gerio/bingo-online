@@ -59,7 +59,7 @@
         const artigo = criarElemento('article');
         const bingo = criarElemento('button', {
           type: 'button',
-          className: 'menu-button bingo',
+          className: 'menu-button primario bingo',
           textContent: 'Bingo!',
         });
         bingo.setAttribute('aria-label', `Bingo na cartela ${indice + 1}`);

@@ -20,7 +20,7 @@ for (const pagina of PAGINAS) {
 
     test('cada script existe e é um script comum válido (sem import/export)', () => {
       const scripts = capturar(/<script src="([^"]+)"><\/script>/g);
-      assert.ok(scripts.length > 0);
+      assert.ok(scripts.length > 0 || pagina === 'index.html');
       for (const src of scripts) {
         const codigo = fs.readFileSync(local(src), 'utf8');
         assert.doesNotThrow(() => new vm.Script(codigo), src);

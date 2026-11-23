@@ -20,7 +20,7 @@
     }
     const td = document.createElement('td');
     td.className = 'sorteado';
-    td.innerHTML = `<h1>${numero}</h1>`;
+    td.textContent = numero;
     linha.append(td);
     td.scrollIntoView({ block: 'nearest' });
   }

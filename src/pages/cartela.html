@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <base href="."/>
     <meta charset="UTF-8">	
     <meta property="og:locale" content="pt_BR" />
-    <meta property="og:url" content="https://r0ger-io.github.io/bingo-online" /><!-- bota o site aqui -->
+    <meta property="og:url" content="https://rr0gerio.github.io/bingo-online/src/pages/cartela.html" />
     <meta property="og:title" content="Bingo do Roger" />
     <meta property="og:site_name" content="Bingo do Roger" />
     <meta property="og:description" content="O portal Bingo Online é um projeto livre para entreterimento entre amigos." />
-    <meta property="og:image" content="../src/images/image.jpg" />
+    <meta property="og:image" content="https://rr0gerio.github.io/bingo-online/src/images/image.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="800" /> 
     <meta property="og:image:height" content="600" />
     <meta property="og:type" content="website" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <meta name="theme-color" content="#7781FC">
     <link rel="stylesheet" href="../css/master.css">
     <link rel="icon" href="../images/favico.jpg" sizes="16x16" />
     
@@ -27,12 +28,12 @@
                 
                 <div class="menu" id="menu-cartela">
                     <h1>Clique no botão abaixo para gerar uma cartela</h1>
-                    <h3>Boa sorte!</h3>
+                    <p class="subtitulo">Boa sorte!</p>
                     <form action="">
                         <ul class="jogador-posit-menu">
                             <li>
 
-                                <input type="button" id="gerar" value="Jogar!" class="menu-button">
+                                <input type="button" id="gerar" value="Jogar!" class="menu-button primario">
                             </li>
                         <li>
                             <a href="../../index.html" class="menu-button">Voltar ao inicio</a>
@@ -40,29 +41,17 @@
                         </ul>
                     </form>
                 </div>
-                <div id="instrucoes">
-                    <header>
-                        <h1>Não sabe jogar?</h1>
-                        <h3>Não se preocupe!</h3>
-                    </header>
-                    <section>
-                        <p>
-                            Antes de cada partida, o jogador escolhe quantas cartelas deseja usar (no máximo 4) simultaneamente. Quando a partida começa, os números são sorteados, um por um, aleatoriamente, e o jogador deve verificar se eles estão em sua cartela.<br>
-                            <b>Caso um número sorteado esteja na cartela do jogador, ele deverá marcá-lo com um click</b><br>
-                            É importante saber qual o padrão e a regra da partida, isto é, quais padrões devem ser completados para que o jogador possa bingar.<br>
-                            O jogo só termina quando o número máximo de vencedores acabar.<br>
-                            <ul>
-                                <header>
-                                    Definições:
-                                </header>
-                                <li><b>Marcar número</b> - É o ato de assinalar na cartela que um número foi sorteado. Esta ação é indispensável para poder cantar Bingo, já que um número sorteado, mas não marcado não tem efeito nenhum.</li>
-                                <li><b>Cartela</b>- Cada cartela tem 24 números aleatórios de 1 a 75, dispostos em uma grade de 5 linhas e linhas. O espaço do meio é tampado. Veja aqui para mais detalhes sobre a cartela e como completá-la</li>
-                                <li><b>Padrões</b> - O padrão é a regra que define quais marcações serão consideradas válidas. É importante saber o padrão da fase antes de começar a jogar.</li>
-                                <li><b>Fazer Bingo</b> - É o ato de declarar vitória. Só é possível cantar se um dos padrões da fase estiver completo.</li>
-                            </ul>
-                        </p>
-                    </section>
-                </div>
+                <details id="instrucoes">
+                    <summary>Não sabe jogar? Não se preocupe!</summary>
+                    <p>Escolha de 1 a 4 cartelas. Os números são sorteados um por um, e você deve conferir se eles estão nas suas cartelas.</p>
+                    <p><b>Se um número sorteado estiver na sua cartela, marque-o com um clique.</b></p>
+                    <ul>
+                        <li><b>Cartela</b> – 24 números de 1 a 75, em uma grade de 5 linhas e 5 colunas. O centro é livre e conta como marcado.</li>
+                        <li><b>Marcar número</b> – É assinalar na cartela que um número foi sorteado. Número sorteado e não marcado não vale para o Bingo.</li>
+                        <li><b>Padrões</b> – Linha, coluna, diagonal ou os quatro cantos.</li>
+                        <li><b>Cantar Bingo</b> – É declarar vitória ao completar um padrão. O primeiro Bingo válido encerra a partida.</li>
+                    </ul>
+                </details>
             </div>
             <div class="division card-right card-right-sorteador">   
                 <div id="cartela"></div>
@@ -70,7 +59,6 @@
             
         </div>
     </div>
-    <script src="../js/main.js"></script>
     <script src="../js/logica.js"></script>
     <script src="../js/gerarCartela.js"></script>
 </body>
