@@ -30,7 +30,7 @@ e sorteia números aleatoriamente. O jogador escolhe até 4 cartelas por partida
 - Cada jogador pode usar de 1 a 4 cartelas.
 - Sorteio por clique, sem timer, na partida em um só dispositivo. O painel da TV tem modo automático e voz (Web Speech API), ambos liga/desliga.
 - Lógica pura em `src/js/logica.js`, testada com `node --test`, sem dependências.
-- Fase 2 (adiada): cada jogador no próprio celular, na mesma sala, via semente na URL + relógio. Firebase é plano B apenas para jogo remoto.
+- Fase 2: todos na mesma sala. O painel da TV sorteia; cada jogador marca no próprio celular (`cartela.html`). Cada cartela tem um código de 5 caracteres que a recria em qualquer aparelho; o painel confere o Bingo pelo código contra os números sorteados. Sem rede, semente no sorteio ou relógio. Mudar `criarCartela` ou o código invalida cartelas já abertas (há teste com valor fixo). Firebase é plano B apenas para jogo remoto.
 
 ## Convenções
 - Simplicidade primeiro: manter JS/CSS/HTML puros, sem dependências novas sem perguntar.

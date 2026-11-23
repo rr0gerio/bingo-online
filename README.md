@@ -18,11 +18,11 @@ Antes de cada partida, o jogador escolhe quantas cartelas deseja usar (no máxim
 
 É importante saber qual o padrão e a regra da partida, isto é, quais padrões devem ser completados para que o jogador possa bingar. Geralmente, pode ser uma linha horizontal, uma linha vertical, uma diagonal, ou os 4 cantos da cartela. Mesmo assim, recomenda-se verificar o padrão antes de começar a jogar.
 
-De acordo com a regra, o jogador deverá cantar Bingo assim que completar um dos padrões. Na partida em um só dispositivo, um Bingo incorreto é recusado e o jogo continua.
+De acordo com a regra, o jogador deverá cantar Bingo assim que completar um dos padrões. Na partida em um só dispositivo, um Bingo incorreto é recusado e o jogo continua. Com o painel na TV, quem canta diz o código da sua cartela, e o painel confere se o Bingo vale.
 
 O primeiro Bingo válido encerra a partida.
 
-Cada número é sorteado ao clicar em "Sortear", de forma aleatória, de 1 a 75 e sem repetição.
+Cada número é sorteado ao clicar em "Sortear", ou automaticamente no painel da TV, de forma aleatória, de 1 a 75 e sem repetição.
 
 ### Definições: <a name="defs"></a>
 - **Marcar número** - É o ato de assinalar na cartela que um número foi sorteado. Esta ação é indispensável para poder cantar Bingo, já que um número sorteado, mas não marcado não tem efeito nenhum.

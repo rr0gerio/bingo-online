@@ -16,5 +16,5 @@
 ## Fase 2 — multiplayer (em andamento, branch `multiplayer`)
 
 - [x] Painel da TV: quadro por letra, animações, automático e voz — `painel.html`
-- [ ] 8. Semente na URL + relógio: cada jogador no próprio celular, na mesma sala.
+- [x] 8. Cada jogador no próprio celular, na mesma sala: código por cartela, conferido no painel (substitui semente na URL + relógio).
       Firebase é plano B apenas para jogo remoto.

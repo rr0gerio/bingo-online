@@ -20,13 +20,15 @@ Atualize ao fim de cada sessão. O próximo agente começa lendo este arquivo.
 - 2026-11-23 — Limpeza autorizada: `setup-bingo.sh`, branch `setup-agentes` (local e remota) e `verificaPosicao` (com 3 testes) removidos.
 - 2026-11-23 — Painel da TV: `src/pages/painel.html`, `src/css/painel.css`, `src/js/painel.js` e `src/js/globo.js`; funções novas em `logica.js` com `tests/logica.painel.test.js`; 63 testes passando. Conferido no Chrome headless via `file://` (1280 a 3840 px e 390 px, rodada de 75, automático, nova rodada). Som real da voz e TV física ainda não testados.
 - 2026-11-23 — Painel revisado: layout em uma unidade (`--u`, tela = 160 x 90), bolas e textos centralizados, tudo menor. Rodada e preferências salvas em `localStorage` (`restaurarSorteio` confere os dados). `sorteador.html` e `sorteador.js` removidos, com autorização. 64 testes passando; conferido no Chrome headless de 320 a 3840 px.
+- 2026-11-23 — Sala: código da cartela e conferência em `logica.js` (`tests/logica.codigo.test.js`); `cartela.html` mostra o código, salva marcações e tem "Nova rodada"; painel com "Conferir Bingo" (pausa o automático; o primeiro Bingo válido encerra a rodada). 82 testes passando; fluxo completo conferido no Chrome headless com celular e TV em contextos separados.
 
 ## Em andamento
-- Branch `multiplayer` criada a partir da `master`; todos os jogadores na mesma sala; plano da sala a aprovar.
+- Branch `multiplayer` criada a partir da `master`; sem push; falta teste com TV e celulares de verdade.
 - A skill de geração de imagem do usuário não ficou pronta; `bingo.svg` segue como ilustração.
 
 ## Próximo passo
-- Testar o painel na TV (voz e tamanho). Depois: cartelas no celular com código, conferidas no painel (todos na mesma sala); a definir se dispensa semente no sorteio e relógio.
+- Testar na TV (voz e tamanho) e em celulares; abrir PR da `multiplayer` para a `master`.
+- Limite conhecido: um jogador pode gerar cartela nova no meio da rodada e o painel a aceita.
 
 ## Decisões tomadas
 - AGENTS.md é a fonte única de instruções; CLAUDE.md apenas aponta para ele.

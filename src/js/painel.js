@@ -25,6 +25,10 @@
   const btAutomatico = pegar('automatico');
   const btCantar = pegar('cantar');
   const dialogo = pegar('confirmar');
+  const conferencia = pegar('conferencia');
+  const elCodigo = pegar('codigo');
+  const elResultado = pegar('resultado');
+  const elConferida = pegar('cartela-conferida');
 
   const semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const globo = GloboBingo.criar(pegar('bolas'), { semMovimento });
@@ -32,7 +36,9 @@
 
   let sorteados = [];
   let cores = [];
+  let vencedor = null; // código da cartela que encerrou a rodada
   let sorteando = false;
+  let emCurso = Promise.resolve(); // apresentação do número atual
   let automatico = false;
   let cantar = true;
   let querCantar = true; // preferência salva; `cantar` é falso se não houver voz
@@ -45,6 +51,8 @@
   const corDe = (numero) => CORES[cores[numero - 1]];
   const esperar = (ms) => new Promise((ok) => setTimeout(ok, ms));
   const acabou = () => sorteados.length === TOTAL;
+  const encerrada = () => vencedor !== null || acabou();
+  const dialogoAberto = () => dialogo.open || conferencia.open;
 
   function criarElemento(tag, propriedades = {}) {
     return Object.assign(document.createElement(tag), propriedades);
@@ -64,7 +72,7 @@
 
   function salvar() {
     try {
-      localStorage.setItem(CHAVE, JSON.stringify({ sorteados, cores, intervalo, cantar: querCantar }));
+      localStorage.setItem(CHAVE, JSON.stringify({ sorteados, cores, vencedor, intervalo, cantar: querCantar }));
     } catch { /* sem armazenamento: o painel funciona, só não lembra */ }
   }
 
@@ -114,13 +122,13 @@
     );
   }
 
-  function soltarConfetes({ x, y }, quantidade, alcance) {
+  function soltarConfetes({ x, y }, quantidade, alcance, onde = document.body) {
     if (semMovimento) return;
     for (let i = 0; i < quantidade; i += 1) {
       const pedaco = criarElemento('span', { className: 'confete' });
       pedaco.style.setProperty('--cor', CORES[i % CORES.length]);
       if (i % 2) pedaco.style.borderRadius = '50%';
-      document.body.append(pedaco);
+      onde.append(pedaco);
       const angulo = (i / quantidade) * Math.PI * 2 + Math.random() * 0.5;
       const longe = alcance * (0.6 + Math.random() * 0.6);
       const dx = Math.cos(angulo) * longe;
@@ -167,11 +175,11 @@
     avisar(cantar && semPortugues ? 'Não há voz em português neste aparelho; a pronúncia pode ficar estranha.' : '');
   }
 
-  /** Canta o número e espera o fim da fala, com limite de tempo. */
-  function cantarNumero(numero) {
+  /** Fala o texto e espera o fim, com limite de tempo. */
+  function falar(texto) {
     if (!cantar || !voz) return Promise.resolve();
     voz.cancel();
-    const fala = new SpeechSynthesisUtterance(BingoLogica.textoParaCantar(numero));
+    const fala = new SpeechSynthesisUtterance(texto);
     fala.lang = 'pt-BR';
     fala.rate = 0.9;
     fala.voice = vozEmPortugues() || null;
@@ -179,6 +187,8 @@
     voz.speak(fala);
     return Promise.race([fim, esperar(ESPERA_VOZ_MS)]);
   }
+
+  const cantarNumero = (numero) => falar(BingoLogica.textoParaCantar(numero));
 
   // ---------- Desenho ----------
 
@@ -232,9 +242,14 @@
     return casa;
   }
 
+  function textoSortear() {
+    if (vencedor) return 'Rodada encerrada';
+    return acabou() ? 'Fim do sorteio' : 'Sortear';
+  }
+
   function atualizarBotoes() {
-    btSortear.setAttribute('aria-disabled', String(sorteando || acabou()));
-    pegar('sortear-texto').textContent = acabou() ? 'Fim do sorteio' : 'Sortear';
+    btSortear.setAttribute('aria-disabled', String(sorteando || encerrada()));
+    pegar('sortear-texto').textContent = textoSortear();
     btAutomatico.setAttribute('aria-checked', String(automatico));
     btCantar.setAttribute('aria-checked', String(cantar));
     pegar('intervalo').textContent = `${intervalo} s`;
@@ -285,7 +300,7 @@
   }
 
   async function sortear() {
-    if (sorteando || acabou() || dialogo.open) return;
+    if (sorteando || encerrada() || dialogoAberto()) return;
     pararRelogio();
     sorteando = true;
     inicioSorteio = performance.now();
@@ -295,7 +310,8 @@
     desenharAnteriores();
     atualizarBotoes();
 
-    await apresentar(numero);
+    emCurso = apresentar(numero);
+    await emCurso;
 
     elMensagem.textContent = `Número sorteado: ${BingoLogica.letraDoNumero(numero)} ${numero}.`
       + (acabou() ? ' Todos os números já saíram.' : '');
@@ -324,7 +340,7 @@
 
   function agendar() {
     pararRelogio();
-    if (!automatico || sorteando || acabou() || dialogo.open) return;
+    if (!automatico || sorteando || encerrada() || dialogoAberto()) return;
     const total = intervalo * 1000;
     // Sem sorteio anterior (ou já passado do prazo), dá um respiro curto.
     const decorrido = sorteados.length ? performance.now() - inicioSorteio : total;
@@ -347,6 +363,7 @@
     if (voz) voz.cancel();
     reiniciarAoTerminar = false;
     automatico = false;
+    vencedor = null;
     sorteados = [];
     cores = BingoLogica.sortearCores(CORES.length);
     salvar();
@@ -381,6 +398,8 @@
     querCantar = salvo.cantar !== false;
     cantar = querCantar;
     ({ sorteados, cores } = rodada);
+    const conferido = BingoLogica.conferirCodigo(salvo.vencedor, sorteados);
+    vencedor = conferido && conferido.padrao ? conferido.codigo : null;
     desenharRodada();
   }
 
@@ -388,6 +407,75 @@
     dialogo.close();
     if (sorteando) reiniciarAoTerminar = true;
     else novaRodada();
+  }
+
+  // ---------- Conferência do Bingo ----------
+
+  function mostrarResultado(texto, classe = '') {
+    elResultado.textContent = texto;
+    elResultado.className = `resultado ${classe}`;
+  }
+
+  function desenharConferida(numeros, padrao) {
+    const tabela = criarElemento('table');
+    const cabecalho = criarElemento('tr');
+    cabecalho.append(...[...'BINGO'].map((letra) => criarElemento('th', { textContent: letra, scope: 'col' })));
+    tabela.append(cabecalho);
+    const doPadrao = (l, c) => Boolean(padrao) && padrao.posicoes.some(([pl, pc]) => pl === l && pc === c);
+    numeros.forEach((linha, l) => {
+      const tr = criarElemento('tr');
+      tr.append(...linha.map((numero, c) => {
+        const td = criarElemento('td', { textContent: numero === null ? '' : numero });
+        td.classList.toggle('central', numero === null);
+        td.classList.toggle('chamado', sorteados.includes(numero));
+        td.classList.toggle('padrao', doPadrao(l, c));
+        return td;
+      }));
+      tabela.append(tr);
+    });
+    elConferida.replaceChildren(tabela);
+  }
+
+  function limparConferencia() {
+    elCodigo.value = '';
+    mostrarResultado('');
+    elConferida.replaceChildren();
+  }
+
+  function abrirConferencia() {
+    pararRelogio();
+    limparConferencia();
+    conferencia.showModal();
+    elCodigo.focus();
+  }
+
+  async function conferir(evento) {
+    evento.preventDefault();
+    const texto = elCodigo.value;
+    // O número em apresentação só vale depois de aparecer.
+    await emCurso;
+    if (!conferencia.open) return;
+    const obtido = BingoLogica.conferirCodigo(texto, sorteados);
+    elConferida.replaceChildren();
+    if (!obtido) {
+      mostrarResultado('Código não encontrado. Confira com o jogador e digite de novo.');
+      elCodigo.select();
+      return;
+    }
+    desenharConferida(obtido.numeros, obtido.padrao);
+    if (!obtido.padrao) {
+      mostrarResultado(`Ainda não é Bingo na cartela ${obtido.codigo}. Em amarelo, o que já saiu.`);
+      elCodigo.select();
+      return;
+    }
+    mostrarResultado(`BINGO! A cartela ${obtido.codigo} venceu com ${BingoLogica.descreverPadrao(obtido.padrao)}.`, 'vitoria');
+    soltarConfetes({ x: window.innerWidth / 2, y: window.innerHeight / 2 }, 60, window.innerHeight * 0.45, conferencia);
+    falar('Bingo!');
+    if (vencedor) return;
+    vencedor = obtido.codigo;
+    automatico = false;
+    salvar();
+    atualizarBotoes();
   }
 
   function alternarTelaCheia() {
@@ -399,7 +487,7 @@
 
   btSortear.addEventListener('click', sortear);
   btAutomatico.addEventListener('click', () => {
-    automatico = !automatico && !acabou();
+    automatico = !automatico && !encerrada();
     atualizarBotoes();
     agendar();
   });
@@ -421,6 +509,10 @@
   pegar('cancelar').addEventListener('click', () => dialogo.close());
   pegar('confirmar-nova').addEventListener('click', confirmarNova);
   dialogo.addEventListener('close', agendar);
+  pegar('conferir').addEventListener('click', abrirConferencia);
+  pegar('conferencia-form').addEventListener('submit', conferir);
+  pegar('fechar-conferencia').addEventListener('click', () => conferencia.close());
+  conferencia.addEventListener('close', agendar);
 
   const btTelaCheia = pegar('tela-cheia');
   btTelaCheia.hidden = !document.documentElement.requestFullscreen;
