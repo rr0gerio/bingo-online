@@ -15,12 +15,12 @@ export function verificaPosicao(indice) {
 }
 
 /**
- * Gera um número aleatório inteiro em [0, range).
+ * Gera um número aleatório inteiro em [1, range].
  * Usa Math.random internamente; os testes substituem Math.random por meio
  * do comMathRandom helper para resultados determinísticos.
- * @param {number} range - número máximo exclusivo (ex.: 75 → devolve 0..74)
- * @returns {number} inteiro >= 0 e < range
+ * @param {number} range - número máximo inclusivo (ex.: 75 → devolve 1..75)
+ * @returns {number} inteiro >= 1 e <= range
  */
 export function gerarNumeroAleatorio(range) {
-  return Math.floor(range * Math.random());
+  return Math.floor(range * Math.random()) + 1;
 }
