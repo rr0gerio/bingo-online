@@ -147,7 +147,22 @@ const BingoLogica = (function () {
     return Math.max(0, intervaloMs - decorridoMs);
   }
 
+  /**
+   * Confere um sorteio salvo no navegador. Devolve { sorteados, cores } ou
+   * null se algo estiver faltando, repetido ou fora da faixa.
+   */
+  function restaurarSorteio(dados, quantidadeDeCores) {
+    if (!dados || !Array.isArray(dados.sorteados) || !Array.isArray(dados.cores)) return null;
+    const { sorteados, cores } = dados;
+    const numerosValidos = sorteados.every((n) => letraDoNumero(n) !== null)
+      && new Set(sorteados).size === sorteados.length;
+    const coresValidas = cores.length === MAX_NUMERO
+      && cores.every((c) => Number.isInteger(c) && c >= 0 && c < quantidadeDeCores);
+    return numerosValidos && coresValidas ? { sorteados: [...sorteados], cores: [...cores] } : null;
+  }
+
   return {
+    restaurarSorteio,
     letraDoNumero,
     textoParaCantar,
     sortearCores,

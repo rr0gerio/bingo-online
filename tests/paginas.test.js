@@ -9,7 +9,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const RAIZ = path.join(__dirname, '..');
-const PAGINAS = ['index.html', 'src/pages/cartela.html', 'src/pages/sorteador.html', 'src/pages/jogo.html', 'src/pages/painel.html'];
+const PAGINAS = ['index.html', 'src/pages/cartela.html', 'src/pages/jogo.html', 'src/pages/painel.html'];
 
 for (const pagina of PAGINAS) {
   describe(pagina, () => {

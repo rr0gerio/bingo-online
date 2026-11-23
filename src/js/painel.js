@@ -9,6 +9,7 @@
   const TEMPO = { min: 5, max: 30, inicial: 8 };
   const ESPERA_VOZ_MS = 5000;
   const ULTIMOS = 4;
+  const CHAVE = 'bingo-painel';
   const MOLA = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 
   const pegar = (id) => document.getElementById(id);
@@ -34,6 +35,7 @@
   let sorteando = false;
   let automatico = false;
   let cantar = true;
+  let querCantar = true; // preferência salva; `cantar` é falso se não houver voz
   let intervalo = TEMPO.inicial;
   let inicioSorteio = 0;
   let relogio = null;
@@ -56,6 +58,22 @@
     bola.style.setProperty('--cor', corDe(numero));
     bola.append(disco);
     return bola;
+  }
+
+  // ---------- Memória (sobrevive a um recarregamento da página) ----------
+
+  function salvar() {
+    try {
+      localStorage.setItem(CHAVE, JSON.stringify({ sorteados, cores, intervalo, cantar: querCantar }));
+    } catch { /* sem armazenamento: o painel funciona, só não lembra */ }
+  }
+
+  function ler() {
+    try {
+      return JSON.parse(localStorage.getItem(CHAVE));
+    } catch {
+      return null;
+    }
   }
 
   // ---------- Animações ----------
@@ -273,6 +291,7 @@
     inicioSorteio = performance.now();
     const numero = BingoLogica.sortearNumero(sorteados);
     sorteados = [...sorteados, numero];
+    salvar();
     desenharAnteriores();
     atualizarBotoes();
 
@@ -316,6 +335,7 @@
 
   function mudarIntervalo(passo) {
     intervalo = Math.min(TEMPO.max, Math.max(TEMPO.min, intervalo + passo));
+    salvar();
     atualizarBotoes();
     agendar();
   }
@@ -329,14 +349,39 @@
     automatico = false;
     sorteados = [];
     cores = BingoLogica.sortearCores(CORES.length);
-    globo.definirBolas(Array.from({ length: TOTAL }, (_, i) => ({ numero: i + 1, cor: corDe(i + 1) })));
+    salvar();
+    desenharRodada();
     globo.agitar(500);
-    desenharQuadro();
-    desenharSoquete(null);
-    desenharAnteriores();
-    elContagem.textContent = 0;
     elMensagem.textContent = 'Nova rodada pronta.';
+  }
+
+  /** Desenha tudo a partir de `sorteados`, sem animar. */
+  function desenharRodada() {
+    const noGlobo = Array.from({ length: TOTAL }, (_, i) => i + 1).filter((n) => !sorteados.includes(n));
+    globo.definirBolas(noGlobo.map((numero) => ({ numero, cor: corDe(numero) })));
+    desenharQuadro();
+    sorteados.forEach(ocuparCasa);
+    desenharSoquete(sorteados[sorteados.length - 1] || null);
+    desenharAnteriores();
+    elContagem.textContent = sorteados.length;
     atualizarBotoes();
+  }
+
+  /** Retoma a rodada salva; o automático sempre volta desligado. */
+  function abrir() {
+    const salvo = ler();
+    const rodada = BingoLogica.restaurarSorteio(salvo, CORES.length);
+    if (!rodada) {
+      novaRodada();
+      return;
+    }
+    if (Number.isInteger(salvo.intervalo) && salvo.intervalo >= TEMPO.min && salvo.intervalo <= TEMPO.max) {
+      intervalo = salvo.intervalo;
+    }
+    querCantar = salvo.cantar !== false;
+    cantar = querCantar;
+    ({ sorteados, cores } = rodada);
+    desenharRodada();
   }
 
   function confirmarNova() {
@@ -360,6 +405,8 @@
   });
   btCantar.addEventListener('click', () => {
     cantar = !cantar;
+    querCantar = cantar;
+    salvar();
     if (!cantar) voz.cancel();
     conferirVoz();
     atualizarBotoes();
@@ -379,11 +426,11 @@
   btTelaCheia.hidden = !document.documentElement.requestFullscreen;
   btTelaCheia.addEventListener('click', alternarTelaCheia);
   document.addEventListener('fullscreenchange', () => {
-    btTelaCheia.textContent = document.fullscreenElement ? 'Sair da tela cheia' : 'Tela cheia';
+    btTelaCheia.setAttribute('aria-pressed', String(Boolean(document.fullscreenElement)));
   });
 
   if (voz && voz.addEventListener) voz.addEventListener('voiceschanged', conferirVoz);
+  abrir();
   conferirVoz();
-  novaRodada();
   elMensagem.textContent = '';
 })();

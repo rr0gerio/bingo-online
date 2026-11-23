@@ -20,6 +20,7 @@ const FUNCOES = [
   'esperaRestante',
   'gerarNumeroAleatorio',
   'letraDoNumero',
+  'restaurarSorteio',
   'sortear',
   'sortearCores',
   'sortearNumero',

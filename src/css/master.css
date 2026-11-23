@@ -206,13 +206,10 @@ td button{
 td:has(button:enabled):hover{
     border-color: var(--destaque);
 }
-td.marked, td.sorteado{
+td.marked{
     border-color: var(--destaque);
     background: var(--destaque);
     color: #fff;
-}
-td.sorteado{
-    overflow-anchor: auto;
 }
 td.central{
     border-color: var(--coral);

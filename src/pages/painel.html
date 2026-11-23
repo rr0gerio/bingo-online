@@ -26,7 +26,6 @@
         <section class="topo">
             <div class="globo" id="globo">
                 <canvas id="bolas" aria-hidden="true"></canvas>
-                <span class="globo-brilho" aria-hidden="true"></span>
             </div>
 
             <div class="palco">
@@ -45,15 +44,17 @@
                     <span class="progresso" id="progresso" aria-hidden="true"></span>
                 </button>
 
-                <div class="opcoes">
+                <div class="opcao">
                     <button type="button" class="chave" id="automatico" role="switch" aria-checked="false">
                         <span class="chave-trilho" aria-hidden="true"></span>Automático
                     </button>
                     <div class="tempo" role="group" aria-label="Tempo entre sorteios">
-                        <button type="button" class="gordo pequeno" id="menos" aria-label="Diminuir o tempo">−</button>
+                        <button type="button" class="gordo" id="menos" aria-label="Diminuir o tempo">−</button>
                         <output id="intervalo">8 s</output>
-                        <button type="button" class="gordo pequeno" id="mais" aria-label="Aumentar o tempo">+</button>
+                        <button type="button" class="gordo" id="mais" aria-label="Aumentar o tempo">+</button>
                     </div>
+                </div>
+                <div class="opcao">
                     <button type="button" class="chave" id="cantar" role="switch" aria-checked="true">
                         <span class="chave-trilho" aria-hidden="true"></span>Cantar números
                     </button>
@@ -61,9 +62,9 @@
                 <p class="aviso" id="aviso" role="status" hidden></p>
 
                 <div class="acoes">
-                    <button type="button" class="gordo pequeno" id="tela-cheia">Tela cheia</button>
-                    <button type="button" class="gordo pequeno" id="nova">Nova rodada</button>
-                    <a href="../../index.html" class="gordo pequeno">Início</a>
+                    <button type="button" class="gordo" id="tela-cheia" aria-pressed="false">Tela cheia</button>
+                    <button type="button" class="gordo" id="nova">Nova rodada</button>
+                    <a href="../../index.html" class="gordo">Início</a>
                 </div>
             </div>
         </section>
@@ -75,8 +76,8 @@
         <h2 id="confirmar-titulo">Começar outra rodada?</h2>
         <p>Os números sorteados até agora serão apagados.</p>
         <div class="acoes">
-            <button type="button" class="gordo pequeno" id="cancelar" autofocus>Continuar esta</button>
-            <button type="button" class="gordo pequeno primario" id="confirmar-nova">Nova rodada</button>
+            <button type="button" class="gordo" id="cancelar" autofocus>Continuar esta</button>
+            <button type="button" class="gordo primario" id="confirmar-nova">Nova rodada</button>
         </div>
     </dialog>
 

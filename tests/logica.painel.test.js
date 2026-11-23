@@ -62,3 +62,33 @@ describe('esperaRestante', () => {
     assert.equal(logica.esperaRestante(5000, 9000), 0);
   });
 });
+
+describe('restaurarSorteio', () => {
+  const cores = Array.from({ length: 75 }, (_, i) => i % 5);
+  const restaurar = (dados) => logica.restaurarSorteio(dados, 5);
+
+  test('devolve uma cópia do sorteio salvo, na mesma ordem', () => {
+    const salvo = { sorteados: [53, 7, 70], cores };
+    const obtido = restaurar(JSON.parse(JSON.stringify(salvo)));
+    assert.deepEqual(obtido, salvo);
+    assert.notEqual(obtido.sorteados, salvo.sorteados);
+  });
+
+  test('aceita rodada vazia e rodada completa', () => {
+    const todos = Array.from({ length: 75 }, (_, i) => i + 1);
+    assert.deepEqual(restaurar({ sorteados: [], cores }).sorteados, []);
+    assert.equal(restaurar({ sorteados: todos, cores }).sorteados.length, 75);
+  });
+
+  test('recusa números repetidos, fora da faixa ou de outro tipo', () => {
+    for (const sorteados of [[7, 7], [0], [76], [1.5], ['7'], [null], 'abc', undefined]) {
+      assert.equal(restaurar({ sorteados, cores }), null, JSON.stringify(sorteados));
+    }
+  });
+
+  test('recusa cores inválidas e dados ausentes', () => {
+    assert.equal(restaurar({ sorteados: [7], cores: cores.slice(1) }), null);
+    assert.equal(restaurar({ sorteados: [7], cores: cores.map(() => 5) }), null);
+    for (const dados of [null, undefined, 3, {}, []]) assert.equal(restaurar(dados), null);
+  });
+});
