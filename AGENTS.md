@@ -5,12 +5,12 @@
 
 ## Objetivo
 Bingo online recreativo para jogar entre amigos. Gera cartelas (24 números, espaço central livre)
-e sorteia números aleatoriamente. O jogador escolhe até 4 cartelas por partida (a implementar: hoje o botão desabilita após a primeira cartela).
+e sorteia números aleatoriamente. O jogador escolhe até 4 cartelas por partida.
 
 ## Stack
 - HTML, CSS e JavaScript puros (sem framework, sem build).
 - Arquivos principais: `index.html` e a pasta `src/`.
-- Testes: `tests/` criado com o runner nativo (`node:test`), zero dependências — `tests/helpers.js` carrega `src/js/main.js` via `node:vm` e `tests/main.test.js` (9 testes de caracterização).
+- Testes: `tests/` criado com o runner nativo (`node:test`), zero dependências — `main.test.js` e `logica*.test.js` cobrem `src/js/logica.js`; `paginas.test.js` confere scripts e links das páginas.
 
 ## Como rodar
 - Abrir `index.html` no navegador (ou usar um servidor estático simples, se necessário).
@@ -18,9 +18,9 @@ e sorteia números aleatoriamente. O jogador escolhe até 4 cartelas por partida
 
 ## Regras do jogo (resumo)
 - Cartela: grade 5x5, 24 números, centro livre.
-- Faixa de números: 1 a 75, em 5 colunas de 15 (1–15, 16–30, 31–45, 46–60, 61–75). O zero é explicitamente rejeitado. Bug conhecido: `src/js/gerarCartela.js:17` usa `gerarNumeroAleatorio(75)`, que sorteia no máximo 74, então o 75 nunca aparece em cartela, embora o sorteador possa chamá-lo.
-- Padrões de vitória: linha, coluna, diagonal e quatro cantos; o centro livre conta como marcado. Status: NÃO implementado (`verificaVencedor()` está vazia e nunca é chamada).
-- Sorteio manual, por clique em "Sortear" (o texto anterior dizia "automático"), uniforme de 1 a 75, sem repetir número. Status: hoje o próximo número fica limitado à faixa da coluna da vez — a corrigir.
+- Faixa de números: 1 a 75, em 5 colunas de 15 (1–15, 16–30, 31–45, 46–60, 61–75). O zero é explicitamente rejeitado.
+- Padrões de vitória: linha, coluna, diagonal e quatro cantos; o centro livre conta como marcado. Implementado em `BingoLogica.verificarVencedor`.
+- Sorteio manual, por clique em "Sortear", uniforme de 1 a 75, sem repetir número.
 
 ## Decisões de design (Fase 1)
 - Sorteio uniforme de 1 a 75. A cartela usa faixas por coluna; o sorteio não.

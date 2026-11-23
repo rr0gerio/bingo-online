@@ -8,7 +8,7 @@
 - [3 Conclusao](#conclusao)
 
 ## Introdução <a name="intro"></a>
-O Bingo Online foi criado com o propósito recreativo para uso entre amigos durante uma festa junina online. O jogo consiste na produção de cartelas com 24 números de 0 a 75 e no sorteio posterior destes. 
+O Bingo Online foi criado com o propósito recreativo para uso entre amigos durante uma festa junina online. O jogo consiste na produção de cartelas com 24 números de 1 a 75 e no sorteio posterior destes. 
 
 ## Regras do Jogo<a name="regras"></a>
 ### Apresentação<a name="apresentacao"></a>
@@ -18,15 +18,15 @@ Antes de cada partida, o jogador escolhe quantas cartelas deseja usar (no máxim
 
 É importante saber qual o padrão e a regra da partida, isto é, quais padrões devem ser completados para que o jogador possa bingar. Geralmente, pode ser uma linha horizontal, uma linha vertical, uma diagonal, ou os 4 cantos da cartela. Mesmo assim, recomenda-se verificar o padrão antes de começar a jogar.
 
-De acordo com a regra, o jogador deverá cantar Bingo assim que completar um dos padrões. A cartela será declarada inválida caso o pedido seja falso e/ou incorreto.
+De acordo com a regra, o jogador deverá cantar Bingo assim que completar um dos padrões. Na partida em um só dispositivo, um Bingo incorreto é recusado e o jogo continua.
 
-O jogo termina quando o número máximo de vencedores acabar. Ou seja, a partida será encerrada imediatamente após o último Bingo disponível ser cantado. Nesse momento, ocorre a premiação, quando o jogador recebe os pontos de experiências, fichas, moedas virtuais correspondentes a seu desempenho, entre outros benefícios.
+O primeiro Bingo válido encerra a partida.
 
-Os sorteios de números são feitos de forma aleatória e automática, e não há intervenção de qualquer pessoa nesse processo.
+Cada número é sorteado ao clicar em "Sortear", de forma aleatória, de 1 a 75 e sem repetição.
 
 ### Definições: <a name="defs"></a>
 - **Marcar número** - É o ato de assinalar na cartela que um número foi sorteado. Esta ação é indispensável para poder cantar Bingo, já que um número sorteado, mas não marcado não tem efeito nenhum.
-- **Cartela** - Cada cartela tem 24 números aleatórios de 1 a 74, dispostos em uma grade de 5 linhas e linhas. O espaço do meio é tampado. Veja aqui para mais detalhes sobre a cartela e como completá-la
+- **Cartela** - Cada cartela tem 24 números aleatórios de 1 a 75, dispostos em uma grade de 5 linhas e 5 colunas. O centro é livre e conta como marcado.
 - **Padrões** - O padrão é a regra que define quais marcações serão consideradas válidas. É importante saber o padrão da fase antes de começar a jogar.
 - **Cantar/Fazer Bingo** - É o ato de declarar vitória. Só é possível cantar se um dos padrões da fase estiver completo.
 

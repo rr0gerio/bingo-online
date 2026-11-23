@@ -13,13 +13,14 @@ Atualize ao fim de cada sessão. O próximo agente começa lendo este arquivo.
 - 2026-11-23 — Interface da partida: `src/pages/jogo.html` e `src/js/jogo.js` reescritos sobre `BingoLogica` (Sortear, chamados, marcação, Bingo por cartela, 1 a 4 cartelas, nova partida). Partida jogada até o fim no Chrome headless via `file://`, sem erros no console; esse roteiro não está no repositório.
 - 2026-11-23 — Páginas antigas: `gerarCartela.js` e `sorteador.js` reescritos sobre `BingoLogica` (cartela: 1 a 4, marca/desmarca; sorteador: 75 sem repetir). Funções antigas removidas de `main.js`. Links locais em todas as páginas e "Nova partida" no `index.html`. Layout-base do `master.css` refeito (sem sobreposição, funciona em 390 px). Novo `tests/paginas.test.js`; 51 testes passando; conferido no Chrome via `file://`.
 - 2026-11-23 — Ferramentas: skills `design-taste-frontend`, `web-design-guidelines` e `image-to-code` em `.claude/skills/` (ignoradas no git; versões em `skills-lock.json`); `@playwright/cli` 0.1.25 global na máquina.
+- 2026-11-23 — Passo 6 concluído: `lang`, `og:url`/`og:image`, instruções visíveis em `cartela.html`, README e `AGENTS.md` atualizados; bloqueio de DevTools desligado (`main.js` apagado, com autorização).
+- 2026-11-23 — Visual de `master.css` e `jogo.html` inspirado no DESIGN.md do Notion (espaçamento, bordas, tipografia), mantendo o roxo, a Montserrat e o logo. 51 testes passando; conferido no Chrome em 1440 e 390 px.
 
 ## Em andamento
-- Passo 6 (limpeza) e visual inspirado no DESIGN.md do Notion.
+- Trocar o GIF externo do `index.html` por imagem própria (o usuário vai enviar uma skill de geração de imagem).
 
 ## Próximo passo
-- Passo 6 do docs/PLAN.md: README (faixa 0–75), bloqueio de DevTools em `main.js`, `#instrucoes`, `og:image`, `lang="en"`. O `AGENTS.md` ainda descreve bugs já corrigidos.
-- Visual: referência escolhida em `awesome-design-md`: `notion` (só inspiração de espaçamento e tipografia; mantém a identidade e o roxo).
+- Passo 7 do docs/PLAN.md e, depois, a fase 2 (semente na URL).
 
 ## Decisões tomadas
 - AGENTS.md é a fonte única de instruções; CLAUDE.md apenas aponta para ele.
