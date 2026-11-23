@@ -1,5 +1,5 @@
 // Página do sorteador (sorteador.html). Números em ordem de sorteio, 5 por
-// linha; a coluna é só visual e não limita o número.
+// linha; a posição é só visual e não limita o número.
 
 (function () {
   'use strict';
@@ -10,7 +10,6 @@
   const sorteados = [];
   let linha = null;
 
-  tabela.innerHTML = '<tr><th>P</th><th>O</th><th>I</th><th>N</th><th>T</th></tr>';
   document.getElementById('cartela').append(tabela);
 
   function mostrarNumero(numero) {
