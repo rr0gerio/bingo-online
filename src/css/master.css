@@ -150,11 +150,6 @@ h1{
     border-color: var(--destaque-escuro);
     background: var(--destaque-escuro);
 }
-.menu-button.discreto{
-    border-color: transparent;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
 .menu-button:disabled, .menu-button:disabled:hover{
     border-color: var(--linha);
     background: var(--linha);

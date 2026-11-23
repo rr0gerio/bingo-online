@@ -13,20 +13,16 @@ const vm = require('node:vm');
 
 const caminho = path.join(__dirname, '..', 'src', 'js', 'logica.js');
 const FUNCOES = [
-  'alternarMarcacao',
-  'cantarBingo',
   'cartelaDoCodigo',
   'conferirCodigo',
   'criarCartela',
   'criarCodigo',
-  'criarPartida',
   'descreverPadrao',
   'esperaRestante',
   'gerarNumeroAleatorio',
   'letraDoNumero',
   'restaurarCartelas',
   'restaurarSorteio',
-  'sortear',
   'sortearCores',
   'sortearNumero',
   'textoParaCantar',

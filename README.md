@@ -18,14 +18,14 @@ Antes de cada partida, o jogador escolhe quantas cartelas deseja usar (no máxim
 
 É importante saber qual o padrão e a regra da partida, isto é, quais padrões devem ser completados para que o jogador possa bingar. Geralmente, pode ser uma linha horizontal, uma linha vertical, uma diagonal, ou os 4 cantos da cartela. Mesmo assim, recomenda-se verificar o padrão antes de começar a jogar.
 
-De acordo com a regra, o jogador deverá cantar Bingo assim que completar um dos padrões. Na partida em um só dispositivo, um Bingo incorreto é recusado e o jogo continua. Com o painel na TV, quem canta diz o código da sua cartela, e o painel confere se o Bingo vale.
+De acordo com a regra, o jogador deverá cantar Bingo assim que completar um dos padrões. Quem canta diz o código da sua cartela, e o painel da TV confere se o Bingo vale. Um Bingo incorreto é recusado e o jogo continua.
 
 O primeiro Bingo válido encerra a partida.
 
-Cada número é sorteado ao clicar em "Sortear", ou automaticamente no painel da TV, de forma aleatória, de 1 a 75 e sem repetição.
+Os jogadores ficam na mesma sala, cada um com as cartelas no próprio celular. Cada número é sorteado no painel da TV, ao clicar em "Sortear" ou automaticamente, de forma aleatória, de 1 a 75 e sem repetição.
 
 ### Definições: <a name="defs"></a>
-- **Marcar número** - É o ato de assinalar na cartela que um número foi sorteado. Esta ação é indispensável para poder cantar Bingo, já que um número sorteado, mas não marcado não tem efeito nenhum.
+- **Marcar número** - É o ato de assinalar na cartela que um número foi sorteado. Serve para o jogador perceber quando completou um padrão; o painel confere o Bingo pelos números sorteados.
 - **Cartela** - Cada cartela tem 24 números aleatórios de 1 a 75, dispostos em uma grade de 5 linhas e 5 colunas. O centro é livre e conta como marcado.
 - **Padrões** - O padrão é a regra que define quais marcações serão consideradas válidas. É importante saber o padrão da fase antes de começar a jogar.
 - **Cantar/Fazer Bingo** - É o ato de declarar vitória. Só é possível cantar se um dos padrões da fase estiver completo.

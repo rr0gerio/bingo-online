@@ -21,13 +21,14 @@ Atualize ao fim de cada sessão. O próximo agente começa lendo este arquivo.
 - 2026-11-23 — Painel da TV: `src/pages/painel.html`, `src/css/painel.css`, `src/js/painel.js` e `src/js/globo.js`; funções novas em `logica.js` com `tests/logica.painel.test.js`; 63 testes passando. Conferido no Chrome headless via `file://` (1280 a 3840 px e 390 px, rodada de 75, automático, nova rodada). Som real da voz e TV física ainda não testados.
 - 2026-11-23 — Painel revisado: layout em uma unidade (`--u`, tela = 160 x 90), bolas e textos centralizados, tudo menor. Rodada e preferências salvas em `localStorage` (`restaurarSorteio` confere os dados). `sorteador.html` e `sorteador.js` removidos, com autorização. 64 testes passando; conferido no Chrome headless de 320 a 3840 px.
 - 2026-11-23 — Sala: código da cartela e conferência em `logica.js` (`tests/logica.codigo.test.js`); `cartela.html` mostra o código, salva marcações e tem "Nova rodada"; painel com "Conferir Bingo" (pausa o automático; o primeiro Bingo válido encerra a rodada). 82 testes passando; fluxo completo conferido no Chrome headless com celular e TV em contextos separados.
+- 2026-11-23 — Removida, com autorização, a partida em um só dispositivo (`jogo.html`, `jogo.js`, `criarPartida`, `sortear`, `alternarMarcacao`, `cantarBingo` e testes). Menu com "Pegar minhas cartelas" e "Abrir painel da TV".
 
 ## Em andamento
-- Branch `multiplayer` criada a partir da `master`; sem push; falta teste com TV e celulares de verdade.
+- Branch `multiplayer` criada a partir da `master`; PR para a `master`; falta teste com TV e celulares de verdade.
 - A skill de geração de imagem do usuário não ficou pronta; `bingo.svg` segue como ilustração.
 
 ## Próximo passo
-- Testar na TV (voz e tamanho) e em celulares; abrir PR da `multiplayer` para a `master`.
+- Testar na TV (voz e tamanho) e em celulares; mesclar o PR.
 - Limite conhecido: um jogador pode gerar cartela nova no meio da rodada e o painel a aceita.
 
 ## Decisões tomadas

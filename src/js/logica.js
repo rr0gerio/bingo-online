@@ -3,11 +3,9 @@
 // abrir a página direto do arquivo (file://) e com require() nos testes.
 // No navegador, use `BingoLogica.nomeDaFuncao(...)`.
 //
-// Partida: { cartelas: [{ numeros, marcados }], sorteados, vencedor }
-// - numeros: matriz [linha][coluna] 5x5, com null no centro livre
+// - numeros (cartela): matriz [linha][coluna] 5x5, com null no centro livre
 // - marcados e sorteados: arrays de números
-// - vencedor: null ou { cartela: indice, padrao }
-// As funções não alteram a partida recebida; devolvem uma nova.
+// As funções não alteram o que recebem.
 
 const BingoLogica = (function () {
   'use strict';
@@ -87,47 +85,6 @@ const BingoLogica = (function () {
       return numero === null || (marcados.includes(numero) && sorteados.includes(numero));
     };
     return listarPadroes().find((padrao) => padrao.posicoes.every(casaVale)) || null;
-  }
-
-  /** Partida nova, com cartelas novas. Serve também para "Nova partida". */
-  function criarPartida(quantidade) {
-    if (!Number.isInteger(quantidade) || quantidade < 1 || quantidade > MAX_CARTELAS) {
-      throw new RangeError(`A quantidade de cartelas deve ser de 1 a ${MAX_CARTELAS}.`);
-    }
-    return {
-      cartelas: Array.from({ length: quantidade }, () => ({ numeros: criarCartela(), marcados: [] })),
-      sorteados: [],
-      vencedor: null,
-    };
-  }
-
-  /** Sorteia o próximo número. Sem efeito após o fim ou depois dos 75. */
-  function sortear(partida) {
-    if (partida.vencedor) return partida;
-    const numero = sortearNumero(partida.sorteados);
-    if (numero === null) return partida;
-    return { ...partida, sorteados: [...partida.sorteados, numero] };
-  }
-
-  /** Marca ou desmarca um número. O sorteio só é conferido no Bingo. */
-  function alternarMarcacao(partida, indice, numero) {
-    const alvo = partida.cartelas[indice];
-    if (partida.vencedor || !alvo) return partida;
-    if (numero === null || !alvo.numeros.flat().includes(numero)) return partida;
-
-    const marcados = alvo.marcados.includes(numero)
-      ? alvo.marcados.filter((n) => n !== numero)
-      : [...alvo.marcados, numero];
-    const cartelas = partida.cartelas.map((c, i) => (i === indice ? { ...c, marcados } : c));
-    return { ...partida, cartelas };
-  }
-
-  /** Valida o Bingo da cartela; se valer, encerra a partida. */
-  function cantarBingo(partida, indice) {
-    const alvo = partida.cartelas[indice];
-    if (partida.vencedor || !alvo) return partida;
-    const padrao = verificarVencedor(alvo.numeros, alvo.marcados, partida.sorteados);
-    return padrao ? { ...partida, vencedor: { cartela: indice, padrao } } : partida;
   }
 
   /** Letra da coluna do número (1–15 B, 16–30 I, ...); null fora de 1 a 75. */
@@ -259,10 +216,6 @@ const BingoLogica = (function () {
     criarCartela,
     sortearNumero,
     verificarVencedor,
-    criarPartida,
-    sortear,
-    alternarMarcacao,
-    cantarBingo,
   };
 })();
 
