@@ -174,9 +174,6 @@ table{
     border-collapse: separate;
     border-spacing: 6px;
 }
-#cartela table + table{
-    margin-top: 24px;
-}
 th{
     color: var(--destaque);
     font-family: 'Titan One', 'Arial Rounded MT Bold', sans-serif;
