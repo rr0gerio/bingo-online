@@ -3,46 +3,19 @@
 /**
  * Helpers dos testes (node:test, sem dependências).
 
- * POR QUE `carregarMain()` EXISTE:
- * `src/js/main.js` é um script de navegador: além das funções puras
- * (`verificaPosicao` e `gerarNumeroAleatorio`) ele toca o DOM no topo
- * (`document.addEventListener`, `document.onkeydown`). Um `require()` direto
- * no Node quebraria com "document is not defined". Até o passo 3 extrair a
- * lógica para `src/js/logica.js`, carregamos o arquivo real com `node:vm` e um
- * stub mínimo de `document`, para que os testes de caracterização exercitem o
- * código de verdade — e não uma cópia que poderia divergir.
+ * PASSO 3: a partir daqui o carregador usa `require` para o módulo de
+ * lógica pura recém-extraído (`src/js/logica.js`), expondo as mesmas
+ * funções (`verificaPosicao`, `gerarNumeroAleatorio`) que os testes
+ * de `tests/main.test.js` já conhecem.
 
- * PASSO 3: quando `src/js/logica.js` existir, troque o corpo de
- * `carregarMain()` por `require('../src/js/logica.js')`, expondo a mesma
- * superfície (`verificaPosicao`, `gerarNumeroAleatorio`). Os testes de
- * `tests/main.test.js` devem continuar valendo sem alteração.
+ * Em futuros passos, quando a refatoração para `src/js/main.js` usar
+ * apenas `require('../src/js/logica.js')`, este helper continuará
+ * inalterado — os mesmos `import`/`export` continuam válidos.
  */
 
 const fs = require('node:fs');
 const path = require('node:path');
-const vm = require('node:vm');
-
-/**
- * Carrega o `src/js/main.js` real num contexto de `vm` com um stub de
- * `document`. Retorna o contexto: `contexto.verificaPosicao`,
- * `contexto.gerarNumeroAleatorio`, etc.
-
- * `Math` do host é injetado de propósito: `vm.createContext` cria um realm
- * próprio, então o `Math` de dentro do contexto NÃO é o mesmo objeto do host.
- * Sem essa injeção, `comMathRandom` (que substitui `Math.random`) não teria
- * efeito no código carregado.
- */
-function carregarMain() {
-  const arquivo = path.join(__dirname, '..', 'src', 'js', 'main.js');
-  const codigo = fs.readFileSync(arquivo, 'utf8');
-  const contexto = {
-    document: { addEventListener() {}, onkeydown: null },
-    Math,
-  };
-  vm.createContext(contexto);
-  vm.runInContext(codigo, contexto, { filename: arquivo });
-  return contexto;
-}
+const { verificaPosicao, gerarNumeroAleatorio } = require('../src/js/logica.js');
 
 /**
  * PRNG determinístico mulberry32. Mesma semente => mesma sequência, em
@@ -82,6 +55,18 @@ function comMathRandom(valorOuFn, fn) {
   } finally {
     Math.random = original;
   }
+}
+
+/**
+ * Carrega as funções puras de `src/js/logica.js`.
+ * Substitui o antigo carregamento via `node:vm` + stub de `document`,
+ * pois a lógica foi extraída para módulo independente, sem toques no DOM.
+ */
+function carregarMain() {
+  return {
+    verificaPosicao,
+    gerarNumeroAleatorio,
+  };
 }
 
 module.exports = { carregarMain, criarRng, comMathRandom };
