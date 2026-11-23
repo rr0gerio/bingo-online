@@ -18,8 +18,8 @@ Atualize ao fim de cada sessão. O próximo agente começa lendo este arquivo.
 - 2026-11-23 — Identidade nova e única: nome "Bingo", coral, creme, grade de lanchonete retrô, Titan One e Roboto. Removido tudo de Sec4U. Imagens próprias: `bingo.svg`, `icone.svg` e `compartilhar.png`. Inspiração só em cores e clima, sem elementos de marcas de terceiros (sem autorização).
 
 ## Em andamento
-- Decidir se `src/images/image.jpg` e `favico.jpg` (sem uso) serão apagados.
-- A skill de geração de imagem do usuário ainda não chegou.
+- Pull request da `setup-agentes` para a `master`, a ser aberto pelo usuário.
+- A skill de geração de imagem do usuário não ficou pronta; `bingo.svg` segue como ilustração.
 
 ## Próximo passo
 - Passo 7 do docs/PLAN.md e, depois, a fase 2 (semente na URL).
