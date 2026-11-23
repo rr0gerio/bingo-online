@@ -27,6 +27,12 @@ for (const pagina of PAGINAS) {
       }
     });
 
+    test('imagens, ícones e estilos são locais e existem', () => {
+      const arquivos = [...capturar(/<img src="([^"]+)"/g), ...capturar(/<link rel="(?:icon|stylesheet)" href="([^"]+)"/g)];
+      assert.ok(arquivos.length >= 2);
+      for (const src of arquivos) assert.ok(fs.existsSync(local(src)), `não existe: ${src}`);
+    });
+
     test('cada link é local e aponta para um arquivo que existe', () => {
       const links = capturar(/<a href="([^"]+)"/g);
       assert.ok(links.length > 0);

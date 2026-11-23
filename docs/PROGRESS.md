@@ -15,9 +15,11 @@ Atualize ao fim de cada sessão. O próximo agente começa lendo este arquivo.
 - 2026-11-23 — Ferramentas: skills `design-taste-frontend`, `web-design-guidelines` e `image-to-code` em `.claude/skills/` (ignoradas no git; versões em `skills-lock.json`); `@playwright/cli` 0.1.25 global na máquina.
 - 2026-11-23 — Passo 6 concluído: `lang`, `og:url`/`og:image`, instruções visíveis em `cartela.html`, README e `AGENTS.md` atualizados; bloqueio de DevTools desligado (`main.js` apagado, com autorização).
 - 2026-11-23 — Visual de `master.css` e `jogo.html` inspirado no DESIGN.md do Notion (espaçamento, bordas, tipografia), mantendo o roxo, a Montserrat e o logo. 51 testes passando; conferido no Chrome em 1440 e 390 px.
+- 2026-11-23 — Identidade nova e única: nome "Bingo", coral, creme, grade de lanchonete retrô, Titan One e Roboto. Removido tudo de Sec4U. Imagens próprias: `bingo.svg`, `icone.svg` e `compartilhar.png`. Inspiração só em cores e clima, sem elementos de marcas de terceiros (sem autorização).
 
 ## Em andamento
-- Trocar o GIF externo do `index.html` por imagem própria (o usuário vai enviar uma skill de geração de imagem).
+- Decidir se `src/images/image.jpg` e `favico.jpg` (sem uso) serão apagados.
+- A skill de geração de imagem do usuário ainda não chegou.
 
 ## Próximo passo
 - Passo 7 do docs/PLAN.md e, depois, a fase 2 (semente na URL).

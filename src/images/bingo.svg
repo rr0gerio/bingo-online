@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 440" role="img" aria-label="Cartela de bingo com bolas numeradas" font-family="'Arial Rounded MT Bold','Arial Black',Arial,sans-serif" font-weight="900" text-anchor="middle" fill="#1d1d1b">
+  <ellipse cx="260" cy="412" rx="215" ry="16" fill="#1d1d1b" opacity=".1"/>
+  <g transform="translate(134 34) rotate(-6 127 170)">
+    <rect x="-20" y="-12" width="294" height="348" rx="22" fill="#d63a27" stroke="#1d1d1b" stroke-width="5"/>
+    <text x="23" y="44" font-size="38" fill="#f3f0df">B</text>
+    <text x="75" y="44" font-size="38" fill="#f3f0df">I</text>
+    <text x="127" y="44" font-size="38" fill="#f3f0df">N</text>
+    <text x="179" y="44" font-size="38" fill="#f3f0df">G</text>
+    <text x="231" y="44" font-size="38" fill="#f3f0df">O</text>
+    <rect x="0" y="62" width="46" height="46" rx="8" fill="#ff5440" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="23" y="93" font-size="21" fill="#fff">7</text>
+    <rect x="52" y="62" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="75" y="93" font-size="21">18</text>
+    <rect x="104" y="62" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="127" y="93" font-size="21">33</text>
+    <rect x="156" y="62" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="179" y="93" font-size="21">52</text>
+    <rect x="208" y="62" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="231" y="93" font-size="21">64</text>
+    <rect x="0" y="114" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="23" y="145" font-size="21">12</text>
+    <rect x="52" y="114" width="46" height="46" rx="8" fill="#ff5440" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="75" y="145" font-size="21" fill="#fff">29</text>
+    <rect x="104" y="114" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="127" y="145" font-size="21">41</text>
+    <rect x="156" y="114" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="179" y="145" font-size="21">47</text>
+    <rect x="208" y="114" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="231" y="145" font-size="21">70</text>
+    <rect x="0" y="166" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="23" y="197" font-size="21">3</text>
+    <rect x="52" y="166" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="75" y="197" font-size="21">22</text>
+    <rect x="104" y="166" width="46" height="46" rx="8" fill="#fbe3dc" stroke="#1d1d1b" stroke-width="3"/>
+    <polygon points="127.0,174.0 130.8,183.7 141.3,184.4 133.2,191.0 135.8,201.1 127.0,195.5 118.2,201.1 120.8,191.0 112.7,184.4 123.2,183.7" fill="#ffc94d" stroke="#1d1d1b" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="156" y="166" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="179" y="197" font-size="21">58</text>
+    <rect x="208" y="166" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="231" y="197" font-size="21">75</text>
+    <rect x="0" y="218" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="23" y="249" font-size="21">15</text>
+    <rect x="52" y="218" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="75" y="249" font-size="21">16</text>
+    <rect x="104" y="218" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="127" y="249" font-size="21">38</text>
+    <rect x="156" y="218" width="46" height="46" rx="8" fill="#ff5440" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="179" y="249" font-size="21" fill="#fff">60</text>
+    <rect x="208" y="218" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="231" y="249" font-size="21">61</text>
+    <rect x="0" y="270" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="23" y="301" font-size="21">9</text>
+    <rect x="52" y="270" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="75" y="301" font-size="21">25</text>
+    <rect x="104" y="270" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="127" y="301" font-size="21">44</text>
+    <rect x="156" y="270" width="46" height="46" rx="8" fill="#fff" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="179" y="301" font-size="21">49</text>
+    <rect x="208" y="270" width="46" height="46" rx="8" fill="#ff5440" stroke="#1d1d1b" stroke-width="3"/>
+    <text x="231" y="301" font-size="21" fill="#fff">68</text>
+  </g>
+  <g transform="translate(78 336) rotate(-14)">
+    <circle r="66" fill="#ff5440" stroke="#1d1d1b" stroke-width="5"/>
+    <path d="M-44.9 -22.4A50.2 50.2 0 0 1 -13.2 -48.8" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+    <circle r="37.0" fill="#fff" stroke="#1d1d1b" stroke-width="4"/>
+    <text y="-9.2" font-size="21.1">B</text>
+    <text y="22.4" font-size="33.0">9</text>
+  </g>
+  <g transform="translate(440 320) rotate(12)">
+    <circle r="74" fill="#58ab3d" stroke="#1d1d1b" stroke-width="5"/>
+    <path d="M-50.3 -25.2A56.2 56.2 0 0 1 -14.8 -54.8" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+    <circle r="41.4" fill="#fff" stroke="#1d1d1b" stroke-width="4"/>
+    <text y="-10.4" font-size="23.7">G</text>
+    <text y="25.2" font-size="37.0">52</text>
+  </g>
+  <g transform="translate(436 92) rotate(16)">
+    <circle r="52" fill="#ffc94d" stroke="#1d1d1b" stroke-width="5"/>
+    <path d="M-35.4 -17.7A39.5 39.5 0 0 1 -10.4 -38.5" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+    <circle r="29.1" fill="#fff" stroke="#1d1d1b" stroke-width="4"/>
+    <text y="-7.3" font-size="16.6">O</text>
+    <text y="17.7" font-size="26.0">75</text>
+  </g>
+  <g transform="translate(80 118) rotate(-10)">
+    <circle r="46" fill="#f3f0df" stroke="#1d1d1b" stroke-width="5"/>
+    <path d="M-31.3 -15.6A35.0 35.0 0 0 1 -9.2 -34.0" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+    <circle r="25.8" fill="#fff" stroke="#1d1d1b" stroke-width="4"/>
+    <text y="-6.4" font-size="14.7">I</text>
+    <text y="15.6" font-size="23.0">22</text>
+  </g>
+  <g fill="none" stroke="#1d1d1b" stroke-width="5" stroke-linecap="round">
+    <path d="M30 200l-14-6M34 226l-16 4M492 180l14-8M496 206l16 2"/>
+  </g>
+</svg>
