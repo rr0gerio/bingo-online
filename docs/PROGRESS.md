@@ -16,9 +16,10 @@ Atualize ao fim de cada sessão. O próximo agente começa lendo este arquivo.
 - 2026-11-23 — Passo 6 concluído: `lang`, `og:url`/`og:image`, instruções visíveis em `cartela.html`, README e `AGENTS.md` atualizados; bloqueio de DevTools desligado (`main.js` apagado, com autorização).
 - 2026-11-23 — Visual de `master.css` e `jogo.html` inspirado no DESIGN.md do Notion (espaçamento, bordas, tipografia), mantendo o roxo, a Montserrat e o logo. 51 testes passando; conferido no Chrome em 1440 e 390 px.
 - 2026-11-23 — Identidade nova e única: nome "Bingo", coral, creme, grade de lanchonete retrô, Titan One e Roboto. Removido tudo de Sec4U. Imagens próprias: `bingo.svg`, `icone.svg` e `compartilhar.png`. Inspiração só em cores e clima, sem elementos de marcas de terceiros (sem autorização).
+- 2026-11-23 — PRs 1 e 2 (`setup-agentes`) mesclados na `master`. Limpeza na branch `multiplayer`: `src/.DS_Store` fora do git, comentários e imports obsoletos removidos de `tests/helpers.js` e `tests/main.test.js`; 55 testes passando.
 
 ## Em andamento
-- Pull request da `setup-agentes` para a `master`, a ser aberto pelo usuário.
+- Branch `multiplayer` criada a partir da `master`; plano da fase 2 a aprovar.
 - A skill de geração de imagem do usuário não ficou pronta; `bingo.svg` segue como ilustração.
 
 ## Próximo passo

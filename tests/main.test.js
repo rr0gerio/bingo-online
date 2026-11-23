@@ -1,9 +1,8 @@
 'use strict';
 
 /**
- * Testes de CARACTERIZAÇÃO de `src/js/main.js` — travam o comportamento de
- * hoje (inclusive os bugs conhecidos) para que a extração do passo 3 não cause
- * regressão silenciosa.
+ * Testes de regressão das funções básicas de `src/js/logica.js`
+ * (`verificaPosicao` e `gerarNumeroAleatorio`).
  */
 
 const { describe, test, afterEach } = require('node:test');
@@ -41,14 +40,9 @@ describe('verificaPosicao (caracterização)', () => {
     assert.equal(main.verificaPosicao(29), 5);
   });
 
-  test('insumo do BUG A1: o índice reinicia a coluna a cada 5 bolas', () => {
-    // `src/js/sorteador.js` faz `verificaPosicao(numArr.length)` e usa o
-    // resultado como coluna da vez. As 75 bolas cobrem 1–75, mas a bola k
-    // (base 0) só pode cair na faixa da coluna (k mod 5) + 1; a ordem fica
-    // previsível e o sorteio não é uniforme. Este teste trava apenas o insumo
-    // do bug A1; o chamador será testado no passo 5.
+  test('o índice reinicia a coluna a cada 5 posições', () => {
     assert.equal(main.verificaPosicao(4), 5);
-    assert.equal(main.verificaPosicao(5), 1, 'a 6ª bola volta para a coluna 1');
+    assert.equal(main.verificaPosicao(5), 1, 'a 6ª posição volta para a coluna 1');
     assert.equal(main.verificaPosicao(9), 5);
     assert.equal(main.verificaPosicao(10), 1);
   });

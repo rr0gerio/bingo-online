@@ -1,20 +1,7 @@
 'use strict';
 
-/**
- * Helpers dos testes (node:test, sem dependências).
+/** Helpers dos testes (node:test, sem dependências). */
 
- * PASSO 3: a partir daqui o carregador usa `require` para o módulo de
- * lógica pura recém-extraído (`src/js/logica.js`), expondo as mesmas
- * funções (`verificaPosicao`, `gerarNumeroAleatorio`) que os testes
- * de `tests/main.test.js` já conhecem.
-
- * Em futuros passos, quando a refatoração para `src/js/main.js` usar
- * apenas `require('../src/js/logica.js')`, este helper continuará
- * inalterado — os mesmos `import`/`export` continuam válidos.
- */
-
-const fs = require('node:fs');
-const path = require('node:path');
 const { verificaPosicao, gerarNumeroAleatorio } = require('../src/js/logica.js');
 
 /**
@@ -34,7 +21,7 @@ function criarRng(semente) {
 
 /**
  * Executa `fn` com `Math.random` substituído por `valorOuFn` (número fixo ou
- * função) e restaura o original no `finally`, mesmo se `fn` lanzar.
+ * função) e restaura o original no `finally`, mesmo se `fn` lançar.
  *
  * ATENÇÃO: `fn` deve ser síncrona. Se `fn` retornar uma Promise, o helper
  * lança um TypeError. O `finally` garante que `Math.random` é sempre
@@ -57,11 +44,7 @@ function comMathRandom(valorOuFn, fn) {
   }
 }
 
-/**
- * Carrega as funções puras de `src/js/logica.js`.
- * Substitui o antigo carregamento via `node:vm` + stub de `document`,
- * pois a lógica foi extraída para módulo independente, sem toques no DOM.
- */
+/** Funções básicas de `src/js/logica.js` usadas em `main.test.js`. */
 function carregarMain() {
   return {
     verificaPosicao,
