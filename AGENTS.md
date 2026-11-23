@@ -10,11 +10,11 @@ e sorteia números aleatoriamente. O jogador escolhe até 4 cartelas por partida
 ## Stack
 - HTML, CSS e JavaScript puros (sem framework, sem build).
 - Arquivos principais: `index.html` e a pasta `src/`.
-- Testes: nenhum teste automatizado ainda (não existe `tests/` nem `package.json`). A Fase 1 cria `tests/` usando o runner nativo do Node (`node:test`), sem dependências.
+- Testes: `tests/` criado com o runner nativo (`node:test`), zero dependências — `tests/helpers.js` carrega `src/js/main.js` via `node:vm` e `tests/main.test.js` (9 testes de caracterização).
 
 ## Como rodar
 - Abrir `index.html` no navegador (ou usar um servidor estático simples, se necessário).
-- Rodar testes (após criar `tests/`): `node --test tests/` (Node 18+). Alternativa no navegador: abrir `tests/runner.html`. Enquanto `tests/` não existir, não há testes a rodar.
+- Rodar testes: `node --test tests/` (Node 18.8+). Rode antes e depois de qualquer refatoração.
 
 ## Regras do jogo (resumo)
 - Cartela: grade 5x5, 24 números, centro livre.
