@@ -7,14 +7,13 @@
 
 - [x] 1. Ler o código e preencher os campos pendentes do AGENTS.md (sem alterar código)
 - [x] 2. Criar `tests/` com PRNG semeado e testes de caracterização de `gerarNumeroAleatorio` e `verificaPosicao`
-- [ ] 3. Extrair a lógica para funções puras em `src/js/logica.js`, sem mudar o comportamento
-- [ ] 4. Corrigir A2: o 75 passa a existir nas cartelas
-- [ ] 5. Corrigir A1/M1/M3: sorteio uniforme 1–75, laço em vez de recursão, typo `disable`
-- [ ] 6. Implementar vitória (linha, coluna, diagonal, cantos), centro livre e botão Bingo validando
-- [ ] 7. Suportar de 1 a 4 cartelas por jogador e "Nova partida"
-- [ ] 8. Alinhar README/páginas/CSS e limpeza (DevTools, `#instrucoes`, `og:image`, faixa 1–75)
+- [x] 3. Extrair a lógica para funções puras em `src/js/logica.js`, sem mudar o comportamento
+- [x] 4. Corrigir bugs A1 e A2: `gerarNumeroAleatorio(range)` agora devolve [1, range] (antes [0, range)); 75 possível
+- [x] 5. Implementar interface de jogo (botão Bingo, marcação manual, vitória/centro livre, 1–4 cartelas, nova partida) — see `jogo.html`
+- [ ] 6. Alinhar README/páginas/CSS e limpeza (DevTools, `#instrucoes`, `og:image`, faixa 1–75)
+- [ ] 7. Manter testes de caracterização como regressão (steps 1–4)
 
 ## Fase 2 — multiplayer (adiada)
 
-- [ ] 9. Semente na URL + relógio: cada jogador no próprio celular, na mesma sala.
+- [ ] 8. Semente na URL + relógio: cada jogador no próprio celular, na mesma sala.
       Firebase é plano B apenas para jogo remoto.

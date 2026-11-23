@@ -8,12 +8,18 @@ Atualize ao fim de cada sessão. O próximo agente começa lendo este arquivo.
 - 2026-11-23 — Texto do cabeçalho e do status do sorteio revisados; `docs/PLAN.md` reordenado (testes antes da extração) e item 1 marcado.
 - 2026-11-23 — Passo 2 concluído — `tests/` criado com `node:test`, zero dependências: `helpers.js` (carrega `src/js/main.js` via `node:vm` + stub de `document`, PRNG mulberry32 semeado e `comMathRandom`) e `main.test.js` (9 testes de caracterização de `verificaPosicao` e `gerarNumeroAleatorio`). Rodar com `node --test tests/`. A1 e A2 ficam travados NA ORIGEM (ciclo de `verificaPosicao` e teto de `gerarNumeroAleatorio(75)`); os chamadores (`sorteador.js`/`gerarCartela.js`) passam a ter teste nos passos 4 e 5. `src/` intocado.
 - 2026-11-23 — Passo 3 concluído — lógica extraída para `src/js/logica.js` (funções puras `verificaPosicao` e `gerarNumeroAleatorio`); `tests/helpers.js` passou a usar `require('../src/js/logica.js')` em vez de `node:vm`; todos os 9 testes de caracterização continuam passando idênticos em ambas as execuções.
+- 2026-11-23 — `src/js/logica.js` virou script comum (global `BingoLogica` no navegador, `require` nos testes), sem `import`/`export`, para abrir via `file://` e rodar no Node 18. Novo `tests/logica.carregamento.test.js` (3 testes); 12 testes passando.
+- 2026-11-23 — Regras do jogo em `src/js/logica.js` (cartela, sorteio, marcação, vitória, partida de 1 a 4 cartelas), com `tests/logica.test.js`; 43 testes passando. Marcar número não sorteado é permitido; o botão Bingo é que valida. Nenhuma página usa essas funções ainda.
+- 2026-11-23 — Interface da partida: `src/pages/jogo.html` e `src/js/jogo.js` reescritos sobre `BingoLogica` (Sortear, chamados, marcação, Bingo por cartela, 1 a 4 cartelas, nova partida). Partida jogada até o fim no Chrome headless via `file://`, sem erros no console; esse roteiro não está no repositório.
+- 2026-11-23 — Páginas antigas: `gerarCartela.js` e `sorteador.js` reescritos sobre `BingoLogica` (cartela: 1 a 4, marca/desmarca; sorteador: 75 sem repetir). Funções antigas removidas de `main.js`. Links locais em todas as páginas e "Nova partida" no `index.html`. Layout-base do `master.css` refeito (sem sobreposição, funciona em 390 px). Novo `tests/paginas.test.js`; 51 testes passando; conferido no Chrome via `file://`.
+- 2026-11-23 — Ferramentas: skills `design-taste-frontend`, `web-design-guidelines` e `image-to-code` em `.claude/skills/` (ignoradas no git; versões em `skills-lock.json`); `@playwright/cli` 0.1.25 global na máquina.
 
 ## Em andamento
-- (nada)
+- Passo 6 (limpeza) e visual inspirado no DESIGN.md do Notion.
 
 ## Próximo passo
-- Passo 3 do docs/PLAN.md: extrair a lógica para funções puras em `src/js/logica.js` sem mudar o comportamento; trocar `carregarMain()` por `require('../src/js/logica.js')` em `tests/helpers.js`, mantendo os testes.
+- Passo 6 do docs/PLAN.md: README (faixa 0–75), bloqueio de DevTools em `main.js`, `#instrucoes`, `og:image`, `lang="en"`. O `AGENTS.md` ainda descreve bugs já corrigidos.
+- Visual: referência escolhida em `awesome-design-md`: `notion` (só inspiração de espaçamento e tipografia; mantém a identidade e o roxo).
 
 ## Decisões tomadas
 - AGENTS.md é a fonte única de instruções; CLAUDE.md apenas aponta para ele.
