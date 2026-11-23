@@ -22,9 +22,10 @@ Atualize ao fim de cada sessão. O próximo agente começa lendo este arquivo.
 - 2026-11-23 — Painel revisado: layout em uma unidade (`--u`, tela = 160 x 90), bolas e textos centralizados, tudo menor. Rodada e preferências salvas em `localStorage` (`restaurarSorteio` confere os dados). `sorteador.html` e `sorteador.js` removidos, com autorização. 64 testes passando; conferido no Chrome headless de 320 a 3840 px.
 - 2026-11-23 — Sala: código da cartela e conferência em `logica.js` (`tests/logica.codigo.test.js`); `cartela.html` mostra o código, salva marcações e tem "Nova rodada"; painel com "Conferir Bingo" (pausa o automático; o primeiro Bingo válido encerra a rodada). 82 testes passando; fluxo completo conferido no Chrome headless com celular e TV em contextos separados.
 - 2026-11-23 — Removida, com autorização, a partida em um só dispositivo (`jogo.html`, `jogo.js`, `criarPartida`, `sortear`, `alternarMarcacao`, `cantarBingo` e testes). Menu com "Pegar minhas cartelas" e "Abrir painel da TV".
+- 2026-11-23 — PR 3 mesclado. Revisão com os verificadores da skill `design-taste-frontend`: contraste do quadro e do contador, alvos de 44 px, quadro sem pulo ao abrir, descrição e `twitter:card`, formulário sem função removido. As demais falhas são regras de landing page, que não se aplicam ao jogo.
 
 ## Em andamento
-- Branch `multiplayer` criada a partir da `master`; PR para a `master`; falta teste com TV e celulares de verdade.
+- Branch `ajustes-acessibilidade`, PR para a `master`; falta teste com TV e celulares de verdade.
 - A skill de geração de imagem do usuário não ficou pronta; `bingo.svg` segue como ilustração.
 
 ## Próximo passo
