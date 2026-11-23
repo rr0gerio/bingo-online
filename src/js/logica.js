@@ -19,15 +19,6 @@ const BingoLogica = (function () {
   const CENTRO = 2;
 
   /**
-   * Coluna (1..5) da posição na cartela; o ciclo recomeça a cada 5 posições.
-   * @param {number} indice - posição a partir de 0
-   * @returns {number} 1, 2, 3, 4 ou 5
-   */
-  function verificaPosicao(indice) {
-    return ((indice % 5) + 5) % 5 + 1;
-  }
-
-  /**
    * Inteiro aleatório em [1, range].
    * @param {number} range - máximo inclusivo (75 → 1..75)
    * @returns {number}
@@ -132,7 +123,6 @@ const BingoLogica = (function () {
   }
 
   return {
-    verificaPosicao,
     gerarNumeroAleatorio,
     criarCartela,
     sortearNumero,

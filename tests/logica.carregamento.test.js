@@ -20,7 +20,6 @@ const FUNCOES = [
   'gerarNumeroAleatorio',
   'sortear',
   'sortearNumero',
-  'verificaPosicao',
   'verificarVencedor',
 ];
 
@@ -32,7 +31,7 @@ describe('carregamento de logica.js', () => {
 
     const nomes = vm.runInContext('Object.keys(BingoLogica).sort().join()', contexto);
     assert.equal(nomes, FUNCOES.join());
-    assert.equal(vm.runInContext('BingoLogica.verificaPosicao(5)', contexto), 1);
+    assert.equal(vm.runInContext('BingoLogica.gerarNumeroAleatorio(1)', contexto), 1);
   });
 
   test('só expõe BingoLogica, sem funções soltas no escopo global', () => {

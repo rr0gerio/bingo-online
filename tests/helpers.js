@@ -2,7 +2,7 @@
 
 /** Helpers dos testes (node:test, sem dependências). */
 
-const { verificaPosicao, gerarNumeroAleatorio } = require('../src/js/logica.js');
+const { gerarNumeroAleatorio } = require('../src/js/logica.js');
 
 /**
  * PRNG determinístico mulberry32. Mesma semente => mesma sequência, em
@@ -44,12 +44,9 @@ function comMathRandom(valorOuFn, fn) {
   }
 }
 
-/** Funções básicas de `src/js/logica.js` usadas em `main.test.js`. */
+/** Função básica de `src/js/logica.js` usada em `main.test.js`. */
 function carregarMain() {
-  return {
-    verificaPosicao,
-    gerarNumeroAleatorio,
-  };
+  return { gerarNumeroAleatorio };
 }
 
 module.exports = { carregarMain, criarRng, comMathRandom };
