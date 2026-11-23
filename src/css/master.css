@@ -219,7 +219,7 @@ td.central::before{
     color: var(--tinta-suave);
 }
 #instrucoes summary{
-    padding: 8px 0;
+    padding: 10px 0;
     color: var(--tinta);
     font-weight: 700;
     cursor: pointer;

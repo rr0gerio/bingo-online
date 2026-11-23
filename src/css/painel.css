@@ -9,8 +9,10 @@
     --casa: calc(6 * var(--u));
     --vao: calc(0.9 * var(--u));
     --miolo: calc(1.6 * var(--u));
+    --colunas: 16;
+    --linhas: 5;
     --traco: max(2px, calc(0.32 * var(--u)));
-    --alto: max(40px, calc(3.8 * var(--u)));
+    --alto: max(44px, calc(3.8 * var(--u)));
     --texto: max(14px, calc(1.7 * var(--u)));
     min-height: 100vh;
     padding: calc(2 * var(--u)) 16px;
@@ -173,7 +175,7 @@
     font-family: var(--titulo);
     font-size: 1.6em;
     font-weight: 400;
-    color: var(--destaque);
+    color: var(--destaque-escuro);
 }
 .anteriores{
     --lado: max(34px, calc(3.8 * var(--u)));
@@ -325,7 +327,11 @@
 /* Quadro por letra */
 .quadro{
     justify-self: center;
+    /* O quadro é montado pelo painel.js; reservar o tamanho evita o pulo ao abrir. */
+    width: calc(var(--colunas) * var(--casa) + (var(--colunas) - 1) * var(--vao) + 2 * var(--miolo) + 4px);
+    min-height: calc(var(--linhas) * var(--casa) + (var(--linhas) - 1) * var(--vao) + 2 * var(--miolo) + 4px);
     display: grid;
+    align-content: start;
     gap: var(--vao);
     padding: var(--miolo);
     border: 2px solid var(--coral);
@@ -335,7 +341,7 @@
 }
 .linha-letra{
     display: grid;
-    grid-template-columns: repeat(16, var(--casa));
+    grid-template-columns: repeat(var(--colunas), var(--casa));
     grid-auto-rows: var(--casa);
     gap: var(--vao);
 }
@@ -356,8 +362,8 @@
     border: max(1px, calc(0.15 * var(--u))) solid var(--linha);
     border-radius: 50%;
     background: var(--superficie);
-    /* Apagado de propósito: só o sorteado precisa saltar aos olhos. */
-    color: #8a8371;
+    /* Discreto, mas legível de longe: 5,4:1 sobre o fundo da casa. */
+    color: #6b6555;
     font-size: calc(var(--casa) * 0.38);
     font-weight: 700;
     font-variant-numeric: tabular-nums;
@@ -383,7 +389,7 @@
 
 dialog{
     --u: min(100vw / 160, 100vh / 90);
-    --alto: max(40px, calc(3.8 * var(--u)));
+    --alto: max(44px, calc(3.8 * var(--u)));
     --centrar: 0.08em;
     margin: auto;
     width: min(30em, calc(100vw - 32px));
@@ -506,9 +512,8 @@ dialog .acoes{
         --casa: calc((100vw - 32px - 2 * var(--miolo) - 5 * var(--vao) - 4px) / 6);
         --vao: 6px;
         --miolo: 8px;
-    }
-    .linha-letra{
-        grid-template-columns: repeat(6, var(--casa));
+        --colunas: 6;
+        --linhas: 15;
     }
     .letra{
         grid-row: span 3;
