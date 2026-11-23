@@ -5,7 +5,6 @@
   'use strict';
 
   const LETRAS = ['B', 'I', 'N', 'G', 'O'];
-  const NOME_DIAGONAL = { 1: 'diagonal principal', 2: 'diagonal secundária' };
 
   const elMensagem = document.getElementById('mensagem');
   const elUltimo = document.getElementById('ultimo');
@@ -102,12 +101,6 @@
     [...elCartelas.children].forEach(atualizarCartela);
   }
 
-  function descreverPadrao({ tipo, numero }) {
-    if (tipo === 'cantos') return 'quatro cantos';
-    if (tipo === 'diagonal') return NOME_DIAGONAL[numero];
-    return `${tipo} ${numero}`;
-  }
-
   function novaPartida() {
     const escolhida = document.querySelector('input[name="quantidade"]:checked');
     partida = BingoLogica.criarPartida(Number(escolhida.value));
@@ -127,7 +120,7 @@
   function cantarBingo(indice) {
     partida = BingoLogica.cantarBingo(partida, indice);
     if (partida.vencedor) {
-      const padrao = descreverPadrao(partida.vencedor.padrao);
+      const padrao = BingoLogica.descreverPadrao(partida.vencedor.padrao);
       mostrarMensagem(`BINGO! A cartela ${indice + 1} venceu com ${padrao}.`, 'vitoria');
     } else {
       mostrarMensagem(

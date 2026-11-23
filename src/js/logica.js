@@ -18,15 +18,21 @@ const BingoLogica = (function () {
   const MAX_CARTELAS = 4;
   const CENTRO = 2;
   const LETRAS = ['B', 'I', 'N', 'G', 'O'];
+  // Sem 0/O e 1/I/L, que se confundem ao ditar. 31 é primo: o verificador pega
+  // qualquer caractere trocado e quaisquer dois invertidos.
+  const ALFABETO = '23456789ABCDEFGHJKMNPQRSTUVWXYZ';
+  const TAMANHO_CODIGO = 5; // 4 de identificação + 1 verificador
+  const NOME_DIAGONAL = { 1: 'diagonal principal', 2: 'diagonal secundária' };
   const LETRAS_FALADAS = { B: 'Bê', I: 'I', N: 'Ene', G: 'Gê', O: 'Ó' };
 
   /**
    * Inteiro aleatório em [1, range].
    * @param {number} range - máximo inclusivo (75 → 1..75)
+   * @param {function} rng - gerador em [0, 1)
    * @returns {number}
    */
-  function gerarNumeroAleatorio(range) {
-    return Math.floor(range * Math.random()) + 1;
+  function gerarNumeroAleatorio(range, rng = Math.random) {
+    return Math.floor(range * rng()) + 1;
   }
 
   function intervalo(min, max) {
@@ -34,18 +40,18 @@ const BingoLogica = (function () {
   }
 
   /** Escolhe `quantidade` itens distintos de `itens`, em ordem aleatória. */
-  function escolherDistintos(itens, quantidade) {
+  function escolherDistintos(itens, quantidade, rng = Math.random) {
     const restantes = itens.slice();
     return Array.from({ length: quantidade }, () =>
-      restantes.splice(gerarNumeroAleatorio(restantes.length) - 1, 1)[0],
+      restantes.splice(gerarNumeroAleatorio(restantes.length, rng) - 1, 1)[0],
     );
   }
 
   /** Cartela 5x5 [linha][coluna]: 24 números nas faixas por coluna, centro null. */
-  function criarCartela() {
+  function criarCartela(rng = Math.random) {
     const colunas = intervalo(0, TAMANHO - 1).map((c) => {
       const min = c * NUMEROS_POR_COLUNA + 1;
-      return escolherDistintos(intervalo(min, min + NUMEROS_POR_COLUNA - 1), TAMANHO);
+      return escolherDistintos(intervalo(min, min + NUMEROS_POR_COLUNA - 1), TAMANHO, rng);
     });
     const numeros = intervalo(0, TAMANHO - 1).map((l) => colunas.map((coluna) => coluna[l]));
     numeros[CENTRO][CENTRO] = null;
@@ -161,7 +167,89 @@ const BingoLogica = (function () {
     return numerosValidos && coresValidas ? { sorteados: [...sorteados], cores: [...cores] } : null;
   }
 
+  // ---------- Código da cartela ----------
+
+  /** Gerador determinístico (mulberry32): mesma semente, mesma sequência. */
+  function criarGerador(semente) {
+    let a = semente >>> 0;
+    return () => {
+      a = (a + 0x6d2b79f5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), a | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function verificador(indices) {
+    return ALFABETO[indices.reduce((soma, valor, i) => soma + valor * (i + 2), 0) % ALFABETO.length];
+  }
+
+  /** Código em maiúsculas, sem espaços nem hífens; null se não for válido. */
+  function normalizarCodigo(texto) {
+    if (typeof texto !== 'string') return null;
+    const codigo = texto.toUpperCase().replace(/[\s-]/g, '');
+    const indices = [...codigo].map((c) => ALFABETO.indexOf(c));
+    if (indices.length !== TAMANHO_CODIGO || indices.includes(-1)) return null;
+    return verificador(indices.slice(0, -1)) === codigo[TAMANHO_CODIGO - 1] ? codigo : null;
+  }
+
+  /** Código novo, diferente dos já usados pelo jogador. */
+  function criarCodigo(usados = []) {
+    const indices = Array.from({ length: TAMANHO_CODIGO - 1 }, () => gerarNumeroAleatorio(ALFABETO.length) - 1);
+    const codigo = indices.map((i) => ALFABETO[i]).join('') + verificador(indices);
+    return usados.includes(codigo) ? criarCodigo(usados) : codigo;
+  }
+
+  /** Cartela do código, igual em qualquer aparelho; null se o código não valer. */
+  function cartelaDoCodigo(texto) {
+    const codigo = normalizarCodigo(texto);
+    if (codigo === null) return null;
+    const semente = [...codigo].reduce((total, c) => total * ALFABETO.length + ALFABETO.indexOf(c), 0);
+    return criarCartela(criarGerador(Math.imul(semente, 0x9e3779b1)));
+  }
+
+  /**
+   * Confere um Bingo cantado: recria a cartela e olha só os números sorteados
+   * (o que foi marcado no celular não chega aqui). null se o código não valer.
+   */
+  function conferirCodigo(texto, sorteados) {
+    const numeros = cartelaDoCodigo(texto);
+    if (numeros === null) return null;
+    return {
+      codigo: normalizarCodigo(texto),
+      numeros,
+      padrao: verificarVencedor(numeros, numeros.flat(), sorteados),
+    };
+  }
+
+  /** Confere as cartelas salvas no celular; null se algo não bater. */
+  function restaurarCartelas(dados) {
+    if (!Array.isArray(dados) || dados.length > MAX_CARTELAS) return null;
+    const cartelas = dados.map((item) => {
+      const numeros = item ? cartelaDoCodigo(item.codigo) : null;
+      if (numeros === null || !Array.isArray(item.marcados)) return null;
+      const daCartela = numeros.flat().filter((n) => n !== null);
+      return {
+        codigo: normalizarCodigo(item.codigo),
+        numeros,
+        marcados: daCartela.filter((n) => item.marcados.includes(n)),
+      };
+    });
+    if (cartelas.includes(null)) return null;
+    return new Set(cartelas.map((c) => c.codigo)).size === cartelas.length ? cartelas : null;
+  }
+
+  function descreverPadrao({ tipo, numero }) {
+    if (tipo === 'cantos') return 'quatro cantos';
+    return tipo === 'diagonal' ? NOME_DIAGONAL[numero] : `${tipo} ${numero}`;
+  }
+
   return {
+    criarCodigo,
+    cartelaDoCodigo,
+    conferirCodigo,
+    restaurarCartelas,
+    descreverPadrao,
     restaurarSorteio,
     letraDoNumero,
     textoParaCantar,
